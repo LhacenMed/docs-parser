@@ -22,7 +22,7 @@ npm install
 - `express` - Web server framework
 - `multer` - File upload handling
 - `doc-extract` - Multi-format document text extraction
-- `xlsx` - Excel file parsing (SheetJS)
+- `xlsx` (v0.20.3) - Excel file parsing (SheetJS Community Edition from CDN)
 
 ## Usage
 
@@ -175,5 +175,21 @@ ISC
 ## Notes
 
 - The library uses `doc-extract` which provides a unified API for multiple document formats
+- `xlsx` library is installed from the official SheetJS CDN (v0.20.3) instead of npm registry
 - Some formats may have dependencies on system tools (see System Requirements)
 - Large files may take longer to process
+
+### Why SheetJS from CDN?
+
+The npm registry version of `xlsx` is outdated (0.18.5). The official SheetJS CDN provides the latest version (0.20.3) with:
+- Latest bug fixes and security patches
+- Better performance and stability
+- Support for newer Excel formats
+
+**To upgrade in the future:**
+```bash
+npm rm --save xlsx
+npm i --save https://cdn.sheetjs.com/xlsx-VERSION/xlsx-VERSION.tgz
+```
+
+Check [https://cdn.sheetjs.com](https://cdn.sheetjs.com) for the latest version.
