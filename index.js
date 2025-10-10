@@ -98,7 +98,4 @@ app.post("/extract-excel", upload.single("document"), (req, res) => {
 
 app.listen(3000, () => {
   console.log("Server started on http://localhost:3000");
-  console.log("Supported formats:");
-  console.log("  - Documents: PDF, DOCX, DOC, PPT, PPTX, TXT");
-  console.log("  - Spreadsheets: XLS, XLSX, XLSM, XLSB, XLTX, XLTM, XLAM");
 });
