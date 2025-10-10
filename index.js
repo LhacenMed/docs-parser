@@ -1,13 +1,10 @@
-const path = require("path");
-const fs = require("fs");
-const mammoth = require("mammoth");
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const { PDFParse } = require("pdf-parse");
+const mammoth = require("mammoth");
 const { pathToFileURL } = require("url");
 
 const app = express();
-const filePath = path.join(__dirname, "./samples/cv.docx");
 
 // Configure worker for Node.js environment
 const workerPath = require.resolve("pdfjs-dist/legacy/build/pdf.worker.mjs");
@@ -17,7 +14,7 @@ PDFParse.setWorker(workerUrl);
 app.use("/", express.static("public"));
 app.use(fileUpload());
 
-app.post("/extract-text", async (req, res) => {
+app.post("/extract-pdf", async (req, res) => {
   if (!req.files || !req.files.pdfFile) {
     return res.status(400).send("No file uploaded.").end();
   }
@@ -36,15 +33,18 @@ app.post("/extract-text", async (req, res) => {
   }
 });
 
-mammoth.extractRawText({ path: filePath }).then((result) => {
-  console.log(result.value);
-  const extractedText = result.value;
+app.post("/extract-docx", async (req, res) => {
+  if (!req.files || !req.files.docxFile) {
+    return res.status(400).send("No file uploaded.").end();
+  }
 
-  fs.writeFileSync(
-    path.join(__dirname, "./samples/extracted-text.txt"),
-    extractedText.trim(),
-    "utf8"
-  );
+  try {
+    const result = await mammoth.extractRawText({ buffer: req.files.docxFile.data });
+    res.send(result.value);
+  } catch (err) {
+    console.error("Error processing DOCX file:", err);
+    res.status(500).send("Error processing DOCX file: " + err.message);
+  }
 });
 
 app.listen(3000, () => {

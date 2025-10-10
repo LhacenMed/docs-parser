@@ -6,45 +6,103 @@
     <title>Hello!</title>
   </head>
   <body>
-    <input type="file" id="fileInput" accept=".pdf" />
-    <button type="button" id="btnUpload">Upload</button>
-    <br />
-    <br />
+    <h1>Document Text Extractor</h1>
+    
+    <h2>PDF Extractor</h2>
+    <input type="file" id="pdfInput" accept=".pdf" />
+    <button type="button" id="btnUploadPdf">Upload PDF</button>
     <br />
     <textarea
-      id="resultText"
-      placeholder="Your pdf text will appear her!"
-      style="width: 300px; height: 200px"
+      id="pdfResultText"
+      placeholder="Your PDF text will appear here!"
+      style="width: 500px; height: 200px"
+    ></textarea>
+    
+    <br />
+    <br />
+    
+    <h2>DOCX Extractor</h2>
+    <input type="file" id="docxInput" accept=".docx" />
+    <button type="button" id="btnUploadDocx">Upload DOCX</button>
+    <br />
+    <textarea
+      id="docxResultText"
+      placeholder="Your DOCX text will appear here!"
+      style="width: 500px; height: 200px"
     ></textarea>
 
     <script>
-      const fileInput = document.getElementById("fileInput");
-      const btnUpload = document.getElementById("btnUpload");
-      const resultText = document.getElementById("resultText");
+      // PDF Upload Handler
+      const pdfInput = document.getElementById("pdfInput");
+      const btnUploadPdf = document.getElementById("btnUploadPdf");
+      const pdfResultText = document.getElementById("pdfResultText");
 
-      btnUpload.addEventListener("click", () => {
-        const file = fileInput.files[0];
+      btnUploadPdf.addEventListener("click", () => {
+        const file = pdfInput.files[0];
         if (!file) {
-          alert("Please select a file first!");
+          alert("Please select a PDF file first!");
           return;
         }
 
         const formData = new FormData();
         formData.append("pdfFile", file);
 
-        fetch("/extract-text", {
+        pdfResultText.value = "Processing...";
+
+        fetch("/extract-pdf", {
           method: "POST",
           body: formData,
         })
           .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to process PDF");
+            }
             return response.text();
           })
           .then(data => {
-            resultText.value = data;
+            pdfResultText.value = data;
           })
           .catch((error) => {
             console.error("Error:", error);
+            pdfResultText.value = "";
             alert("Failed to upload and parse the PDF.");
+          });
+      });
+
+      // DOCX Upload Handler
+      const docxInput = document.getElementById("docxInput");
+      const btnUploadDocx = document.getElementById("btnUploadDocx");
+      const docxResultText = document.getElementById("docxResultText");
+
+      btnUploadDocx.addEventListener("click", () => {
+        const file = docxInput.files[0];
+        if (!file) {
+          alert("Please select a DOCX file first!");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("docxFile", file);
+
+        docxResultText.value = "Processing...";
+
+        fetch("/extract-docx", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Failed to process DOCX");
+            }
+            return response.text();
+          })
+          .then(data => {
+            docxResultText.value = data;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            docxResultText.value = "";
+            alert("Failed to upload and parse the DOCX.");
           });
       });
     </script>
