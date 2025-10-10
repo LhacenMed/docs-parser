@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello!</title>
+  </head>
+  <body>
+    <input type="file" id="fileInput" accept=".pdf" />
+    <button type="button" id="btnUpload">Upload</button>
+    <br />
+    <br />
+    <br />
+    <textarea
+      id="resultText"
+      placeholder="Your pdf text will appear her!"
+      style="width: 300px; height: 200px"
+    ></textarea>
+
+    <script>
+      const fileInput = document.getElementById("fileInput");
+      const btnUpload = document.getElementById("btnUpload");
+      const resultText = document.getElementById("resultText");
+
+      btnUpload.addEventListener("click", () => {
+        const file = fileInput.files[0];
+        if (!file) {
+          alert("Please select a file first!");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("pdfFile", file);
+
+        fetch("/extract-text", {
+          method: "POST",
+          body: formData,
+        })
+          .then((response) => {
+            return response.text();
+          })
+          .then(data => {
+            resultText.value = data;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+            alert("Failed to upload and parse the PDF.");
+          });
+      });
+    </script>
+  </body>
+</html>
