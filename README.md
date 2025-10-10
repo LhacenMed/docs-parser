@@ -179,7 +179,7 @@ brew install antiword poppler tesseract
 ## Project Structure
 
 ```
-pdf-parser/
+docs-parser/
 ├── index.js           # Express server with doc-extract integration
 ├── public/
 │   └── index.html    # Web interface
