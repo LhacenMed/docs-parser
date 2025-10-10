@@ -1,0 +1,134 @@
+# Multi-Format Document Text Extractor
+
+A Node.js Express application that extracts text from multiple document formats including PDF, DOCX, DOC, PPT, PPTX, and TXT files.
+
+## Features
+
+- 📄 **Multi-format support**: PDF, DOCX, DOC, PPT, PPTX, TXT
+- 🚀 **Simple API**: Upload any document and get extracted text
+- 📊 **Metadata extraction**: Get document metadata along with text
+- 🎨 **User-friendly interface**: Clean web interface for easy file uploads
+- ⚡ **Fast processing**: Uses `doc-extract` library for efficient text extraction
+
+## Installation
+
+```bash
+npm install
+```
+
+## Dependencies
+
+- `express` - Web server framework
+- `multer` - File upload handling
+- `doc-extract` - Multi-format document text extraction
+
+## Usage
+
+### Start the server
+
+```bash
+node index.js
+```
+
+The server will start on `http://localhost:3000`
+
+### API Endpoints
+
+#### 1. Extract Text Only
+
+**POST** `/extract-text`
+
+Upload a document and receive extracted text as plain text response.
+
+```bash
+curl -X POST http://localhost:3000/extract-text \
+  -F "document=@/path/to/your/file.pdf"
+```
+
+#### 2. Extract Text with Metadata
+
+**POST** `/extract-document`
+
+Upload a document and receive extracted text along with metadata as JSON.
+
+```bash
+curl -X POST http://localhost:3000/extract-document \
+  -F "document=@/path/to/your/file.docx"
+```
+
+**Response:**
+```json
+{
+  "text": "Extracted text content...",
+  "metadata": {
+    "pages": 5,
+    "words": 1234,
+    "characters": 6789
+  },
+  "filename": "file.docx",
+  "mimetype": "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+}
+```
+
+## Web Interface
+
+Open `http://localhost:3000` in your browser to use the web interface:
+
+1. Click "Choose File" and select a document (PDF, DOCX, DOC, PPT, PPTX, or TXT)
+2. Click "Extract Text"
+3. View the extracted text and metadata
+
+## Supported Formats
+
+- **PDF** (.pdf) - Portable Document Format
+- **DOCX** (.docx) - Microsoft Word (2007+)
+- **DOC** (.doc) - Microsoft Word (legacy)
+- **PPT** (.ppt) - Microsoft PowerPoint (legacy)
+- **PPTX** (.pptx) - Microsoft PowerPoint (2007+)
+- **TXT** (.txt) - Plain text files
+
+## System Requirements
+
+For full functionality, some system dependencies may be required:
+
+### Windows
+- Most formats work out of the box
+
+### Linux/Mac
+You may need to install additional tools:
+```bash
+# Ubuntu/Debian
+sudo apt-get install antiword poppler-utils tesseract-ocr
+
+# macOS
+brew install antiword poppler tesseract
+```
+
+## Project Structure
+
+```
+pdf-parser/
+├── index.js           # Express server with doc-extract integration
+├── public/
+│   └── index.html    # Web interface
+├── package.json      # Project dependencies
+└── README.md         # This file
+```
+
+## Error Handling
+
+The application includes comprehensive error handling:
+
+- Returns 400 status for missing files
+- Returns 500 status with error message for processing failures
+- Console logs all errors for debugging
+
+## License
+
+ISC
+
+## Notes
+
+- The library uses `doc-extract` which provides a unified API for multiple document formats
+- Some formats may have dependencies on system tools (see System Requirements)
+- Large files may take longer to process
