@@ -1,0 +1,50 @@
+************* Crash Head ****************
+Time Of Crash      : 2024_08_05-21_19_06
+Device Manufacturer: Xiaomi
+Device Model       : 23090RA98I
+Android Version    : 13
+Android SDK        : 33
+App VersionName    : 2.36.1
+App VersionCode    : 30000044
+************* Crash Head ****************
+
+java.lang.Error: FATAL EXCEPTION [main]
+Unity version     : 2022.3.15f1
+Device model      : Xiaomi 23090RA98I
+Device fingerprint: Redmi/zircon_in/zircon:13/TP1A.220624.014/V14.0.4.0.TNOINXM:user/release-keys
+CPU supported ABI : [arm64-v8a, armeabi-v7a, armeabi]
+Build Type        : Release
+Scripting Backend : IL2CPP
+Libs loaded from  : lib/arm
+Strip Engine Code : true
+
+Caused by: java.lang.OutOfMemoryError
+	at android.graphics.Bitmap.nativeCreate(Native Method)
+	at android.graphics.Bitmap.createBitmap(Bitmap.java:1152)
+	at android.graphics.Bitmap.createBitmap(Bitmap.java:1110)
+	at android.graphics.Bitmap.createBitmap(Bitmap.java:1060)
+	at android.graphics.Bitmap.createBitmap(Bitmap.java:1021)
+	at com.unity3d.player.H.surfaceDestroyed(Unknown Source:2)
+	at android.view.SurfaceView.notifySurfaceDestroyed(SurfaceView.java:1995)
+	at android.view.SurfaceView.updateSurface(SurfaceView.java:1163)
+	at android.view.SurfaceView.setWindowStopped(SurfaceView.java:331)
+	at android.view.SurfaceView.surfaceDestroyed(SurfaceView.java:1877)
+	at android.view.ViewRootImpl.notifySurfaceDestroyed(ViewRootImpl.java:2390)
+	at android.view.ViewRootImpl.setWindowStopped(ViewRootImpl.java:2303)
+	at android.view.WindowManagerGlobal.setStoppedState(WindowManagerGlobal.java:689)
+	at android.app.Activity.performStop(Activity.java:8795)
+	at android.app.ActivityThread.callActivityOnStop(ActivityThread.java:5452)
+	at android.app.ActivityThread.performStopActivityInner(ActivityThread.java:5432)
+	at android.app.ActivityThread.handleStopActivity(ActivityThread.java:5497)
+	at android.app.servertransaction.StopActivityItem.execute(StopActivityItem.java:43)
+	at android.app.servertransaction.ActivityTransactionItem.execute(ActivityTransactionItem.java:45)
+	at android.app.servertransaction.TransactionExecutor.executeLifecycleState(TransactionExecutor.java:176)
+	at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:97)
+	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2436)
+	at android.os.Handler.dispatchMessage(Handler.java:106)
+	at android.os.Looper.loopOnce(Looper.java:211)
+	at android.os.Looper.loop(Looper.java:300)
+	at android.app.ActivityThread.main(ActivityThread.java:8324)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:581)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1028)
