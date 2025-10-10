@@ -16,6 +16,7 @@
     "express-fileupload": "^1.5.2",
     "mammoth": "^1.11.0",
     "multer": "^2.0.2",
-    "pdf-parse": "^2.2.5"
+    "pdf-parse": "^2.2.5",
+    "xlsx": "^0.18.5"
   }
 }

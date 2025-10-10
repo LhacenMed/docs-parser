@@ -1,14 +1,15 @@
 # Multi-Format Document Text Extractor
 
-A Node.js Express application that extracts text from multiple document formats including PDF, DOCX, DOC, PPT, PPTX, and TXT files.
+A Node.js Express application that extracts text and data from multiple document formats including PDF, DOCX, DOC, PPT, PPTX, TXT, and Excel files (XLS, XLSX, XLSM, XLSB, etc.).
 
 ## Features
 
-- 📄 **Multi-format support**: PDF, DOCX, DOC, PPT, PPTX, TXT
-- 🚀 **Simple API**: Upload any document and get extracted text
+- 📄 **Multi-format support**: PDF, DOCX, DOC, PPT, PPTX, TXT, XLS, XLSX, XLSM, XLSB
+- 🚀 **Simple API**: Upload any document and get extracted text/data
 - 📊 **Metadata extraction**: Get document metadata along with text
+- 📈 **Excel support**: Extract data from all sheets with JSON and CSV output
 - 🎨 **User-friendly interface**: Clean web interface for easy file uploads
-- ⚡ **Fast processing**: Uses `doc-extract` library for efficient text extraction
+- ⚡ **Fast processing**: Uses `doc-extract` and `xlsx` libraries for efficient extraction
 
 ## Installation
 
@@ -21,6 +22,7 @@ npm install
 - `express` - Web server framework
 - `multer` - File upload handling
 - `doc-extract` - Multi-format document text extraction
+- `xlsx` - Excel file parsing (SheetJS)
 
 ## Usage
 
@@ -70,22 +72,65 @@ curl -X POST http://localhost:3000/extract-document \
 }
 ```
 
+#### 3. Extract Excel Data
+
+**POST** `/extract-excel`
+
+Upload an Excel file and receive data from all sheets in JSON format.
+
+```bash
+curl -X POST http://localhost:3000/extract-excel \
+  -F "document=@/path/to/your/file.xlsx"
+```
+
+**Response:**
+```json
+{
+  "text": "Sheet: Sheet1\nHeader1,Header2\nValue1,Value2\n\nSheet: Sheet2\n...",
+  "sheets": [
+    {
+      "name": "Sheet1",
+      "data": [
+        {"Header1": "Value1", "Header2": "Value2"},
+        {"Header1": "Value3", "Header2": "Value4"}
+      ]
+    }
+  ],
+  "metadata": {
+    "sheetCount": 2,
+    "sheetNames": ["Sheet1", "Sheet2"]
+  },
+  "filename": "file.xlsx"
+}
+```
+
 ## Web Interface
 
 Open `http://localhost:3000` in your browser to use the web interface:
 
-1. Click "Choose File" and select a document (PDF, DOCX, DOC, PPT, PPTX, or TXT)
+1. Click "Choose File" and select a document (PDF, DOCX, DOC, PPT, PPTX, TXT, XLS, XLSX, etc.)
 2. Click "Extract Text"
-3. View the extracted text and metadata
+3. View the extracted text/data and metadata
+4. For Excel files, see individual sheet data in the metadata section
 
 ## Supported Formats
 
+### Documents
 - **PDF** (.pdf) - Portable Document Format
 - **DOCX** (.docx) - Microsoft Word (2007+)
 - **DOC** (.doc) - Microsoft Word (legacy)
 - **PPT** (.ppt) - Microsoft PowerPoint (legacy)
 - **PPTX** (.pptx) - Microsoft PowerPoint (2007+)
 - **TXT** (.txt) - Plain text files
+
+### Spreadsheets
+- **XLSX** (.xlsx) - Excel (2007+)
+- **XLS** (.xls) - Excel (legacy)
+- **XLSM** (.xlsm) - Excel with macros
+- **XLSB** (.xlsb) - Excel binary format
+- **XLTX** (.xltx) - Excel template
+- **XLTM** (.xltm) - Excel template with macros
+- **XLAM** (.xlam) - Excel add-in
 
 ## System Requirements
 

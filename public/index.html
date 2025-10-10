@@ -7,10 +7,11 @@
   </head>
   <body>
     <h1>📄 Multi-Format Document Text Extractor</h1>
-    <p>Upload any document to extract text. Supports: PDF, DOCX, DOC, PPT, PPTX, TXT</p>
+    <p>Upload any document to extract text.</p>
+    <p><strong>Supported:</strong> PDF, DOCX, DOC, PPT, PPTX, TXT, XLS, XLSX, XLSM, XLSB</p>
     
     <div style="margin: 20px 0;">
-      <input type="file" id="fileInput" accept=".pdf,.docx,.doc,.ppt,.pptx,.txt" />
+      <input type="file" id="fileInput" accept=".pdf,.docx,.doc,.ppt,.pptx,.txt,.xls,.xlsx,.xlsm,.xlsb,.xltx,.xltm,.xlam" />
       <button type="button" id="btnUpload">Extract Text</button>
       <button type="button" id="btnClear" style="margin-left: 10px;">Clear</button>
     </div>
@@ -49,6 +50,12 @@
         }
       });
 
+      // Check if file is Excel
+      const isExcel = (filename) => {
+        const excelExts = ['.xls', '.xlsx', '.xlsm', '.xlsb', '.xltx', '.xltm', '.xlam'];
+        return excelExts.some(ext => filename.toLowerCase().endsWith(ext));
+      };
+
       // Extract text handler
       btnUpload.addEventListener("click", () => {
         const file = fileInput.files[0];
@@ -63,8 +70,10 @@
         resultText.value = "Processing...";
         metadataDiv.style.display = "none";
 
-        // Use the /extract-document endpoint to get metadata too
-        fetch("/extract-document", {
+        // Use appropriate endpoint based on file type
+        const endpoint = isExcel(file.name) ? "/extract-excel" : "/extract-document";
+
+        fetch(endpoint, {
           method: "POST",
           body: formData,
         })
@@ -81,6 +90,12 @@
             if (data.metadata) {
               metadataContent.textContent = JSON.stringify(data.metadata, null, 2);
               metadataDiv.style.display = "block";
+            }
+            
+            // Show sheets info for Excel files
+            if (data.sheets) {
+              const sheetsInfo = `\n\nSheets Data:\n${JSON.stringify(data.sheets, null, 2)}`;
+              metadataContent.textContent += sheetsInfo;
             }
           })
           .catch((error) => {
