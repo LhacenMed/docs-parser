@@ -8,6 +8,7 @@ A Node.js Express application that extracts text and data from multiple document
 - 🚀 **Simple API**: Upload any document and get extracted text/data
 - 📊 **Metadata extraction**: Get document metadata along with text
 - 📈 **Excel support**: Extract data from all sheets with JSON and CSV output
+- 🔍 **OCR for PDFs**: Extract text from scanned PDFs using Tesseract.js
 - 🎨 **User-friendly interface**: Clean web interface for easy file uploads
 - ⚡ **Fast processing**: Uses `doc-extract` and `xlsx` libraries for efficient extraction
 
@@ -23,6 +24,8 @@ npm install
 - `multer` - File upload handling
 - `doc-extract` - Multi-format document text extraction
 - `xlsx` (v0.20.3) - Excel file parsing (SheetJS Community Edition from CDN)
+- `tesseract.js` - JavaScript OCR for extracting text from images and scanned PDFs
+- `pdf-to-png-converter` - Convert PDF pages to images for OCR processing
 
 ## Usage
 
@@ -104,14 +107,38 @@ curl -X POST http://localhost:3000/extract-excel \
 }
 ```
 
+#### 4. Extract Text from PDF with OCR
+
+**POST** `/extract-pdf-ocr`
+
+Upload a PDF file and extract text using OCR (useful for scanned documents).
+
+```bash
+curl -X POST http://localhost:3000/extract-pdf-ocr \
+  -F "document=@/path/to/scanned.pdf"
+```
+
+**Response:**
+```json
+{
+  "text": "Extracted text from all pages...",
+  "ocr": true,
+  "lang": "eng",
+  "filename": "scanned.pdf"
+}
+```
+
+**Note:** OCR processing is slower than regular text extraction and requires more resources.
+
 ## Web Interface
 
 Open `http://localhost:3000` in your browser to use the web interface:
 
 1. Click "Choose File" and select a document (PDF, DOCX, DOC, PPT, PPTX, TXT, XLS, XLSX, etc.)
-2. Click "Extract Text"
-3. View the extracted text/data and metadata
-4. For Excel files, see individual sheet data in the metadata section
+2. For scanned PDFs, check "Use OCR for PDF (slower)"
+3. Click "Extract Text"
+4. View the extracted text/data and metadata
+5. For Excel files, see individual sheet data in the metadata section
 
 ## Supported Formats
 

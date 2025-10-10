@@ -13,6 +13,9 @@
     <div style="margin: 20px 0;">
       <input type="file" id="fileInput" accept=".pdf,.docx,.doc,.ppt,.pptx,.txt,.xls,.xlsx,.xlsm,.xlsb,.xltx,.xltm,.xlam" />
       <button type="button" id="btnUpload">Extract Text</button>
+      <label style="margin-left: 10px;">
+        <input type="checkbox" id="useOcr" /> Use OCR for PDF (slower)
+      </label>
       <button type="button" id="btnClear" style="margin-left: 10px;">Clear</button>
     </div>
     
@@ -56,9 +59,12 @@
         return excelExts.some(ext => filename.toLowerCase().endsWith(ext));
       };
 
+      const isPdf = (filename) => filename.toLowerCase().endsWith('.pdf');
+
       // Extract text handler
       btnUpload.addEventListener("click", () => {
         const file = fileInput.files[0];
+        const useOcr = document.getElementById('useOcr').checked;
         if (!file) {
           alert("Please select a file first!");
           return;
@@ -70,8 +76,10 @@
         resultText.value = "Processing...";
         metadataDiv.style.display = "none";
 
-        // Use appropriate endpoint based on file type
-        const endpoint = isExcel(file.name) ? "/extract-excel" : "/extract-document";
+        // Use appropriate endpoint based on file type and OCR setting
+        let endpoint = "/extract-document";
+        if (isExcel(file.name)) endpoint = "/extract-excel";
+        else if (isPdf(file.name) && useOcr) endpoint = "/extract-pdf-ocr";
 
         fetch(endpoint, {
           method: "POST",
