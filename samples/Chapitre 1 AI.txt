@@ -1,0 +1,607 @@
+L’intelligence artificielle
+appliquée à la finance
+Pr. NASSIH Bouchra
+Bouchra.nassih1@uit.ac.ma
+
+Plan
+• Chapitre 1 : Introduction à l’Intelligence Artificielle
+• Chapitre 2 : Les bases de Python
+• Chapitre 3 : Introduction au machine Learning
+
+2
+
+Objectif
+• Offrir une compréhension progressive des concepts clés de l’IA
+appliqués à la finance, avec une mise en pratique en Python.
+• Identifier les cas d’usage financiers où l’IA apporte de la valeur.
+
+3
+
+Chapitre 1
+Introduction à l’Intelligence
+Artificielle
+
+4
+
+Questions
+• Que savez-vous sur l’intelligence artificielle?
+• Est-ce que cela vous attire? Pourquoi ?
+• Qu’est-ce que l’intelligence?
+• Comment peut-elle être transmise à un ordinateur?
+
+5
+
+Introduction
+• L’intelligence artificielle est en train de transformer le
+
+L’intelligence artificielle
+
+monde en profondeur, en impactant presque tous les
+aspects de notre vie quotidienne :
+ Santé,
+
+finance,
+
+éducation,
+
+transport,
+
+industrie,
+
+sécurité, et bien d’autres.
+
+• Pourtant, elle demeure encore largement incomprise
+par de nombreuses personnes.
+
+6
+
+Introduction
+
+Qu’est-ce que l’IA
+
+7
+
+L’intelligence
+Question
+
+Qu’est-ce que l’intelligence ?
+
+8
+
+L’intelligence
+• L’intelligence est une notion complexe qui englobe plusieurs capacités cognitives et comportementales.
+• On trouve des personnes qui se caractérisent par une intelligence liée à leur:
+
+Capacité d’adaptation
+
+Capacité de penser
+
+Capacité d’assimiler des connaissances et de les acquérir
+Capacité de comprendre les relations
+
+Capacité d’évaluation et de jugement
+• Elle peut être définie de différentes manières selon les disciplines (psychologie, neurosciences,
+philosophie, intelligence artificielle, etc.).
+Pas de définition unique et reconnue de
+l’intelligence
+9
+
+L’intelligence
+L’intelligence est liée à l’être humain, à travers ses facultés de
+compréhension et d’apprentissage, et elle est observable grâce à son
+comportement.
+
+Intelligence = Compréhension + Apprentissage
+
+10
+
+L’artificiel
+Qui n’est pas naturel, fabriqué par l’homme, manquant d’authenticité
+et relevant d’un procédé (une machine ou un processus créé par
+l’homme).
+
+Artificiel = Machine + Logiciel
+ce qui est créé par
+une machine et
+contrôlé par un
+logiciel
+
+11
+
+L’intelligence artificielle
+• Quelques définitions de l’IA :
+• Définie comme l’ensemble des techniques mises en
+œuvre afin de construire des machines capables de
+
+faire preuve d’un comportement que l’on peut
+qualifier intelligent
+• La réplication de l’intelligence humaine dans les
+ordinateurs.
+
+12
+
+L’intelligence artificielle dans le domaine financier
+• Désigne l’utilisation de technologies intelligentes telles que les algorithmes
+avancés, ces technologies permettent de:
+Analyser des données,
+Automatiser des processus,
+Améliorer la prise de décision
+Personnaliser les interactions avec les clients dans le secteur des services
+financiers.
+• Objectif :
+Améliorer la vitesse, l'efficacité et la précision du travail effectué par les humains
+dans le secteur des services financiers.
+
+13
+
+L’intelligence artificielle dans la vie quotidienne
+• Réseaux sociaux : (TikTok/Instagram/YouTube, etc.)
+ L’IA personnalise le fil d’actualité selon vos intérêts, vos abonnements et vos
+interactions.
+Elle détermine les contenus, articles, vidéos et publicités que vous souhaitez voir
+le plus souvent.
+• Réseaux professionnels :
+Sur LinkedIn, l’IA analyse votre profil pour recommander des offres d’emploi
+pertinentes.
+• E-commerce :
+Les sites comme Amazon, exploitent l’IA pour :
+o Personnaliser les recommandations de produits ;
+o Améliorer l’expérience d’achat
+
+14
+
+L’intelligence artificielle dans la vie quotidienne
+• Transports et Navigation :
+ Les applications comme Google Maps ou Waze utilisent l'IA pour calculer les
+itinéraires en temps réel, analyser le trafic et prédire l'heure d'arrivée.
+• Productivité et Créativité :
+ Les outils d'IA générative (ChatGPT, Dall-E) aident à rédiger des textes, traduire
+des langues, générer des images, ou automatiser des courriels et des factures.
+• Finance :
+Détection de fraudes en temps réel sur les cartes bancaires et évaluation de la
+solvabilité pour des crédits
+
+15
+
+Introduction
+
+Qui a inventé l‘IA et quand
+a-t-elle été créée ?
+
+16
+
+L'histoire de l'IA
+• Quelques dates clés qui ont marqué l’évolution de l’intelligence artificielle.
+ 1956 – Dartmouth : Naissance officielle du terme Artificial Intelligence
+ 1970–80 – IA symbolique : systèmes experts, forte utilisation en entreprise
+ 1986 – Backpropagation : apprentissage efficace des réseaux de neurones (retour des approches
+“connexionnistes”).
+
+ 1997 – IBM Deep Blue bat le champion Kasparov aux échecs : étape marquante en jeu / recherche.
+ 2006 – Hinton : relance du “deep learning” (pré-entraînement, réseaux profonds)
+ 2012 – AlexNet (ImageNet) : explosion du deep learning (GPU + big data + CNN)
+ 2017 – Transformers : architecture “attention” → base des grands modèles de langage (LLM).
+ 2020 – Lancement de GPT-3 par OpenAI (modèle de langage)
+ 2021 – Introduction de DALL E et de Codex par OpenAI
+
+ 2022–aujourd’hui ChatGPT : modèles capables de produire texte, images, code
+17
+
+Les niveaux d’IA
+IA faible (étroite) :
+• Le type le plus répandu et le plus mature aujourd’hui.
+• Il se concentre sur une tâche ou un domaine spécifique (reconnaissance d’images, traduction
+automatique, conduite autonome, la détection de maladies, …).
+• Les systèmes d’IA étroite sont généralement très performants dans leur domaine d’expertise,
+mais ils ne sont pas capables de généraliser leurs compétences à d’autres tâches
+
+• Exemple:
+• Siri et Alexa : ce sont des assistants vocaux
+• Les logiciels de reconnaissance faciale
+• Les chatbots de service clients
+• Les algorithmes de recommandation de produits
+18
+
+Les niveaux d’IA
+IA forte (générale) :
+• Il s'agit d'un type hypothétique d'IA qui n'existe pas encore à ce jour.
+• Elle vise à créer des machines capables de comprendre et d’accomplir n’importe quelle tâche
+intellectuelle qu’un humain est capable de réaliser.
+• Une IA forte posséderait une intelligence comparable à celle d’un être humain, avec la capacité
+d’apprendre, de raisonner, de résoudre des problèmes complexes et de s’adapter à de nouvelles
+situations
+• L’IA forte demeure un domaine de recherche actif, et il n’est pas encore certain qu’elle soit réalisable
+
+19
+
+Les niveaux d’IA
+IA super-intelligente :
+• Fait référence à une forme d’intelligence qui
+
+dépasserait de manière significative les capacités
+humaines dans tous les domaines.
+• L’IA super-intelligente constitue une hypothèse
+futuriste, largement explorée dans la science-fiction
+
+et la recherche prospective
+20
+
+Les principaux domaines de l‘IA
+NLP
+
+Computer
+Vision
+
+Robotique
+
+Domaine
+IA
+
+Machine
+Learning
+
+Deep
+Learning
+
+21
+
+Le traitement du langage naturel (NLP )
+• L’un des domaines les plus dynamiques de l’intelligence artificielle aujourd’hui.
+• Le NLP vise à permettre aux machines de comprendre, générer et interagir avec
+du texte ou de la parole humaine.
+• Les modèles de langage de grande taille (LLM), comme GPT-3 et BERT, sont des
+exemples emblématiques de la puissance du NLP. Ils sont capables de
+comprendre le contexte de mots dans une phrase, de traduire des textes, de
+résumer des documents, ou encore d’analyser des sentiments
+• Applications :
+Chatbots et assistants vocaux. ( Siri, Alexa, ou les chatbots des services clients )
+Traduction automatique ( Google Translate )
+Analyse de sentiment ( analyser des avis clients )
+22
+
+La vision par ordinateur (Computer Vision)
+• Un autre domaine clé de l’intelligence artificielle.
+• Elle permet aux machines de comprendre, interpréter et même
+générer des images et des vidéos.
+• Applications :
+Reconnaissance d’images : Identifier des objets dans des images ou
+des vidéos
+Génération d’images : Des modèles comme DALL·E ou Stable
+Diffusion
+
+23
+
+La robotique
+• Un autre domaine où l’intelligence artificielle joue un rôle crucial. Les robots
+industriels, les drones autonomes sont des exemples de systèmes où l’IA et le
+machine learning permettent aux machines d’interagir physiquement avec le
+monde qui les entoure.
+• Applications :
+Automatisation des processus industriels : ( pour des tâches de production
+répétitives, des tâches complexes )
+Conduite autonome : Des entreprises comme Tesla utilisent l’IA pour développer
+des voitures capables de conduire de manière autonome.
+
+24
+
+Machine Learning
+• Donner à une machine la capacité d’apprendre sans être
+explicitement programmée
+• Cela inclut l'apprentissage supervisé, non supervisé et par
+renforcement
+
+25
+
+Deep Learning
+• Sous-ensemble du Machine Learning utilisant des réseaux de
+neurones artificiels multicouches pour modéliser des problèmes
+complexes, très performant pour la reconnaissance d'images et de la
+parole.
+
+26
+
+Comment fonctionne l’IA?
+
+27
+
+Fonctionnement d’IA
+• L’intelligence artificielle fonctionne grâce à trois éléments complémentaires
+
+Les données
+Permettent de nourrir
+et d’entraîner les
+algorithmes
+
+Les algorithmes
+Permettent d’atteindre
+l’objectif grâce à des
+règles et des modèles
+
+La puissance de calcul
+Pour traiter les
+données et exécuter
+les algorithmes
+
+28
+
+Les données
+• Les données numériques, que ce soit celles des entreprises ou du domaine
+public, personnelles ou liées à un contenu, sont le combustible de
+
+l’intelligence artificielle.
+• La qualité des données est critique ; des données biaisées ou de mauvaise
+qualité produisent des modèles d'IA inefficaces ou discriminatoires.
+
+• Pour améliorer la qualité de production d’une IA, il faut lui proposer la
+meilleure qualité de données.
+29
+
+Les données:
+• Définition:
+• Data: pluriel du mot Datum en latin (un fait )
+• Un ensemble de faits qui vont permettre d’aboutir à un résultat
+
+• Types:
+
+tableaux (Excel/SQL)
+Ex. âge, prix, ventes, variables
+météo, indicateurs
+
+JSON, XML, logs avec champs variables
+Ex. événements applicatifs,
+
+contenu libre
+Ex. texte, images, audio, vidéo,
+documents PDF.
+30
+
+Les données (Big Data) :
+• Désigne des ensembles de données très volumineux, très variés et/ou générés
+très rapidement, au point que les outils classiques (Excel, bases simples,
+
+traitements sur un seul ordinateur) deviennent insuffisants.
+• L’idée n’est pas seulement beaucoup de données, mais surtout des données dont
+la taille, la complexité et la vitesse imposent des méthodes spécifiques de
+stockage, de traitement et d’analyse, souvent distribuées.
+
+31
+
+Les données (Big Data) :
+• Les 5V du Big Data :
+ Volume : quantité massive de données (téraoctets, pétaoctets…), provenant par exemple des réseaux sociaux, capteurs,
+transactions, logs informatiques, images satellites, etc.
+ Velocity (Vélocité) : vitesse à laquelle les données sont générées, collectées et doivent parfois être traitées. Certaines
+
+données arrivent en continu (streaming), comme les transactions bancaires, ou les logs en temps réel
+ Variety (Variété) : diversité des formats. On peut avoir des données structurées (tables), semi-structurées (JSON, XML) et
+non structurées (texte, images, audio, vidéo).
+ Veracity (Véracité) : fiabilité et qualité des données. Les données peuvent contenir du bruit, des erreurs, des doublons,
+des valeurs manquantes.
+ Value (Valeur) : capacité à transformer ces données en information utile : prédiction, optimisation, décision.
+
+32
+
+Les données
+• Prétraitement
+Le prétraitement des données est l’ensemble des opérations qui
+visent à convertir les données primaires en un format exploitable
+pour le traitement.
+Préparation des données avant de les fournir à la machine pour
+l’apprentissage.
+Le prétraitement protège contre sur-apprentissage
+Objectifs:
+• Mettre les données dans un format propice au ML
+• Améliorer la performance du modèle
+33
+
+Les données:
+• Prétraitement
+ Les techniques de
+prétraitement des données
+permettent d'affiner les
+données pour les modèles
+de ML
+
+Imputation:
+
+L’encodage
+
+L’extraction
+Prétraitement
+La sélection:
+Normalisation
+
+34
+
+Les données:
+• L’imputation:
+Les données manquantes peuvent fausser l’analyse et conduire à des
+modèles inexacts.
+Les stratégies de gestion des valeurs manquantes incluent
+l'imputation
+Remplir les valeurs manquantes avec des mesures statistiques telles
+que la moyenne ou la médiane
+ L'utilisation d'algorithmes capables de gérer les données
+manquantes, telles que les forêts aléatoires.
+35
+
+Prétraitement des données
+• L’imputation:
+Remplacer les données manquantes par certaines valeurs statistiques
+Méthode 1:
+Compléter par une
+valeurs statistiques
+
+Data.fillna(data['age'].mean())
+
+36
+
+Prétraitement des données
+• L’imputation
+Méthode 2:
+Éliminer les lignes
+
+data.dropna(axis=0)
+
+37
+
+Prétraitement des données
+• L’encodage:
+Remplacer des valeurs qualitatives par des valeurs numériques.
+Les méthodes de codage de données catégorielles, telles que le codage one-hot ou label,
+convertissent les variables catégorielles sous forme numérique pour la formation du modèle.
+
+Le machine Learning ne comprend que les données numériques
+
+1
+0
+
+Convertir les données catégorielles
+en formats numériques avant
+l’apprentissage
+
+Machine Learning repose sur des opérations mathématiques. Les données
+doivent donc être converties en valeurs numériques pour être traitées par les
+modèles.
+38
+
+Prétraitement des données
+• Ingénierie des caractéristiques (feature engineering)
+La création de nouvelles fonctionnalités au lieu d’utiliser uniquement
+les variables brutes à partir de données existantes peut débloquer
+des informations approfondies.
+Ce processus peut impliquer de combiner deux variables pour en
+créer une nouvelle (le calcul de l'indice de masse corporelle à partir
+du poids et de la taille )
+L'extraction de parties de données (Transformer la date en jour de
+semaine) pour une analyse de séries chronologiques.
+39
+
+Prétraitement des données
+• L'extraction de caractéristiques
+Générer de nouvelles variables à partir des informations cachées dans le
+jeu de données.
+Les méthodes d’extraction de caractéristiques peuvent être divisées en
+trois catégories :
+Globales
+Locales
+
+Hybrides
+40
+
+Prétraitement des données
+• La sélection
+ Sélectionner les variables les plus utiles pour notre modèle de ML
+ Quand on fournit trop de variables au modèle, cela affecte ses performances.
+Exemple
+
+• Il existe un ensemble de données d'enquête médicale comportant des centaines de fonctionnalités.
+• Grâce à la sélection des caractéristiques, vous pouvez identifier les caractéristiques les plus pertinentes, telles que l'âge, les
+symptômes et les antécédents médicaux, qui sont essentielles pour prédire une maladie. Cela élimine les détails moins
+importants, comme la couleur préférée d'un patient.
+• Des techniques pour sélectionner les variables les plus importantes:
+ Variance Threshold
+ SelectKBest
+ SelectFromModel
+
+41
+
+Prétraitement des données
+• La normalisation
+Consiste à ramener toutes les valeurs numériques à la même échelle, souvent entre 0 et 1.
+Cela évite qu’une variable avec de grandes valeurs domine les autres lors de l'entraînement du
+modèle.
+
+Les méthodes incluent la mise à l'échelle, min-max, qui redimensionne la fonctionnalité sur une
+plage fixe, généralement de 0 à 1.
+De nombreux algorithmes sont sensibles à l’échelle des variables, notamment :
+ K-nearest neighbors (KNN)
+ SVM (Support Vector Machines)
+
+ Régression logistique
+ Réseaux de neurones (deep learning)
+ Méthodes basées sur les distances
+42
+
+Outils de prétraitement des données
+• Manipulation / nettoyage (tabulaire)
+Pandas / NumPy : nettoyage, gestion des valeurs manquantes….
+Polars : alternative très rapide à Pandas (gros volumes en local).
+• Prétraitement ML “standard”
+Scikit-learn
+• Big Data / données volumineuses
+Apache Spark (PySpark) : traitement distribué (gros volumes, cluster).
+Dask : parallélisation en Python (entre Pandas et Spark).
+• Images (computer vision)
+OpenCV : redimensionnement, filtrage, augmentation, segmentation basique.
+scikit-image : extraction de caractéristiques (HOG, LBP, etc.).
+43
+
+Les algorithmes
+• Un algorithme d’IA n’est pas juste une suite de règles écrites à la main
+• C’est une structure mathématique qui apprend à partir d’exemples.
+• Le cerveau de l’IA
+• Des modèles plus intelligents
+• Apprentissage plus efficace
+
+• Plus spécialisé
+
+44
+
+Les algorithmes
+• Régression linéaire
+• Arbres de décision
+• Random Forest
+• SVM (Support Vector
+Machine)
+• Perceptron multicouche (MLP)
+• K-Means
+
+• DBSCAN
+• Q-Learning
+• Deep Q-Network
+• CNN (Convolutional Neural
+Network)
+• LSTM
+• RNN
+
+45
+
+La puissance de calcul
+• Le muscle de l’IA
+• La puissance de calcul détermine :
+Combien de données tu peux traiter,
+
+La taille du modèle que tu peux entraîner,
+La vitesse (temps d’entraînement et de prédiction),
+• L’IA demande beaucoup de calcul (Deep Learning)
+46
+
+Les limitations de l’IA:
+• L’IA manque la capacité de comprendre des concepts abstraits et faire
+des connexions comme un cerveau humain.
+• L’intelligence humaine implique l’empathie, l’intuition et la créativité
+et bien plus encore.
+• L’IA bien que puissance, ne peut pas vraiment penser ou ressentir
+comme nous le faisons.
+• L’IA peut avoir du mal avec des tâches physiques qui nécessitent une
+dextérité fine et une compréhension intuitive de l’environnement
+• Des choses qui viennent naturellement à la plupart des humains
+47
+
+Conclusion
+• L'intelligence artificielle est une imitation de l'intelligence et non pas une
+intelligence telle qu'on peut la concevoir chez des êtres vivants.
+• Nous pouvons dire qu’une intelligence artificielle est capable de :
+Prédire et anticiper les besoins d'une entreprise,
+Prédire le résultat d’un match de foot,
+Prédire le prix d’acquisition d’une maison,
+Classer/ranger automatiquement les fiches des produits dans les
+bonnes catégories,
+Classer des Emails/Spams,
+Contrôler les déplacements d’un joueur dans un jeu de plateau
+Contrôle des déplacements d’un robot pour la détection des déchets
+nucléaires.
+48
+
+

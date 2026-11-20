@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guide Complet — Examen IA</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f;
+    --surface: #13131a;
+    --surface2: #1c1c26;
+    --border: #2a2a3a;
+    --accent: #7c6af7;
+    --accent2: #f7b26a;
+    --accent3: #6af7c8;
+    --accent4: #f76a8a;
+    --text: #e8e8f0;
+    --text-muted: #888899;
+    --text-dim: #555566;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: linear-gradient(135deg, #0f0f1a 0%, #1a1030 50%, #0f1a18 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 60px 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(124,106,247,.12) 0%, transparent 70%),
+                radial-gradient(ellipse 40% 60% at 20% 80%, rgba(106,247,200,.07) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent3);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    font-weight: 800;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 12px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p {
+    color: var(--text-muted);
+    font-size: 14px;
+    max-width: 580px;
+  }
+  .badges {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid;
+    letter-spacing: 1px;
+  }
+  .badge-purple { border-color: var(--accent); color: var(--accent); background: rgba(124,106,247,.08); }
+  .badge-orange { border-color: var(--accent2); color: var(--accent2); background: rgba(247,178,106,.08); }
+  .badge-green { border-color: var(--accent3); color: var(--accent3); background: rgba(106,247,200,.08); }
+  .badge-red { border-color: var(--accent4); color: var(--accent4); background: rgba(247,106,138,.08); }
+
+  /* ── NAV ── */
+  .toc {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; gap: 4px; overflow-x: auto;
+  }
+  .toc a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 14px 14px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all .2s;
+  }
+  .toc a:hover { color: var(--text); border-color: var(--accent); }
+
+  /* ── LAYOUT ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 48px 40px; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+  /* ── SECTION TITLES ── */
+  .section {
+    margin-bottom: 60px;
+    scroll-margin-top: 60px;
+  }
+  .section-header {
+    display: flex; align-items: center; gap: 14px;
+    margin-bottom: 28px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-number {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: rgba(124,106,247,.1);
+    border: 1px solid rgba(124,106,247,.3);
+    border-radius: 6px;
+    padding: 3px 9px;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+  }
+  .card-accent-purple { border-color: rgba(124,106,247,.35); background: linear-gradient(135deg, var(--surface) 0%, rgba(124,106,247,.05) 100%); }
+  .card-accent-orange { border-color: rgba(247,178,106,.35); background: linear-gradient(135deg, var(--surface) 0%, rgba(247,178,106,.05) 100%); }
+  .card-accent-green { border-color: rgba(106,247,200,.35); background: linear-gradient(135deg, var(--surface) 0%, rgba(106,247,200,.05) 100%); }
+  .card-accent-red { border-color: rgba(247,106,138,.35); background: linear-gradient(135deg, var(--surface) 0%, rgba(247,106,138,.05) 100%); }
+
+  .card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-title .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-purple { background: var(--accent); }
+  .dot-orange { background: var(--accent2); }
+  .dot-green { background: var(--accent3); }
+  .dot-red { background: var(--accent4); }
+
+  /* ── TEXT ELEMENTS ── */
+  .def-block {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin: 10px 0;
+  }
+  .def-block.orange { border-color: var(--accent2); }
+  .def-block.green { border-color: var(--accent3); }
+  .def-block.red { border-color: var(--accent4); }
+
+  .def-term {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .def-term.orange { color: var(--accent2); }
+  .def-term.green { color: var(--accent3); }
+  .def-term.red { color: var(--accent4); }
+
+  ul.clean { list-style: none; }
+  ul.clean li {
+    padding: 5px 0;
+    padding-left: 16px;
+    position: relative;
+    color: var(--text);
+    font-size: 13.5px;
+  }
+  ul.clean li::before {
+    content: '›';
+    position: absolute; left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    background: var(--surface2);
+    padding: 10px 14px;
+    text-align: left;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid var(--border);
+  }
+  td {
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    line-height: 1.5;
+  }
+  tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+  .tag-sup { color: var(--accent3); font-family: 'DM Mono', monospace; font-size: 11px; }
+  .tag-unsup { color: var(--accent2); font-family: 'DM Mono', monospace; font-size: 11px; }
+  .tag-rl { color: var(--accent4); font-family: 'DM Mono', monospace; font-size: 11px; }
+
+  /* ── CODE ── */
+  pre, code {
+    font-family: 'DM Mono', monospace;
+  }
+  .code-block {
+    background: #0d0d14;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+    font-size: 12.5px;
+    overflow-x: auto;
+    margin: 10px 0;
+    line-height: 1.8;
+  }
+  .code-block .c { color: #555; }
+  .code-block .kw { color: var(--accent); }
+  .code-block .fn { color: var(--accent3); }
+  .code-block .st { color: var(--accent2); }
+  .code-block .nm { color: #e8e8f0; }
+  .code-block .op { color: var(--accent4); }
+
+  /* ── EXAM BOX ── */
+  .exam-q {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 10px 0;
+  }
+  .exam-q-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent4);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .exam-q p { font-size: 13.5px; color: var(--text); margin-bottom: 8px; }
+  .exam-answer {
+    background: rgba(106,247,200,.05);
+    border: 1px solid rgba(106,247,200,.2);
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--text);
+    margin-top: 8px;
+  }
+  .exam-answer-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--accent3);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  /* ── IMPORTANT BOX ── */
+  .alert {
+    display: flex; gap: 12px;
+    background: rgba(247,178,106,.07);
+    border: 1px solid rgba(247,178,106,.25);
+    border-radius: 10px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 13px;
+  }
+  .alert-icon { font-size: 18px; flex-shrink: 0; }
+
+  /* ── MIND MAP STYLE ── */
+  .tree {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+  }
+  .tree-root {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--accent);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .tree-branch { margin-left: 16px; }
+  .tree-node {
+    font-size: 13px;
+    padding: 3px 0;
+    color: var(--text);
+  }
+  .tree-node::before { content: '├─ '; color: var(--text-dim); font-family: 'DM Mono', monospace; }
+  .tree-node:last-child::before { content: '└─ '; color: var(--text-dim); font-family: 'DM Mono', monospace; }
+  .tree-leaf {
+    margin-left: 30px;
+    font-size: 12px;
+    color: var(--text-muted);
+    padding: 1px 0;
+  }
+  .tree-leaf::before { content: '└── '; color: var(--text-dim); font-family: 'DM Mono', monospace; }
+
+  /* ── COMPARE TABLE ── */
+  .compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .compare-col {
+    background: var(--surface2);
+    border-radius: 8px;
+    padding: 14px;
+  }
+  .compare-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  /* ── FORMULA ── */
+  .formula {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: var(--accent3);
+    text-align: center;
+    padding: 10px;
+    background: var(--surface2);
+    border-radius: 6px;
+    margin: 8px 0;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .compare { grid-template-columns: 1fr; }
+    .container { padding: 32px 20px; }
+    .hero { padding: 40px 20px; }
+    .toc { padding: 0 20px; }
+  }
+
+  hr.divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 28px 0;
+  }
+
+  .highlight { color: var(--accent2); font-weight: 500; }
+  .highlight-green { color: var(--accent3); font-weight: 500; }
+  .highlight-red { color: var(--accent4); font-weight: 500; }
+  .highlight-purple { color: var(--accent); font-weight: 500; }
+
+  p { margin-bottom: 8px; font-size: 13.5px; }
+  h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin: 16px 0 8px;
+  }
+
+  .step-row {
+    display: flex; gap: 10px; align-items: flex-start;
+    margin: 8px 0;
+  }
+  .step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: var(--accent);
+    color: #000;
+    border-radius: 4px;
+    padding: 2px 7px;
+    flex-shrink: 0;
+    margin-top: 3px;
+    font-weight: 500;
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">Guide Examen Rattrapage</div>
+  <h1>Intelligence Artificielle<br><span>appliquée à la Finance</span></h1>
+  <p>Pr. NASSIH Bouchra — Chapitres 1 & 3 — Tout ce qu'il faut savoir pour l'examen, sans aucune source supplémentaire.</p>
+  <div class="badges">
+    <span class="badge badge-purple">CHAPITRE 1 : INTRO IA</span>
+    <span class="badge badge-orange">CHAPITRE 3 : MACHINE LEARNING</span>
+    <span class="badge badge-green">QUESTIONS TYPES</span>
+    <span class="badge badge-red">CODE PYTHON</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="toc">
+  <a href="#definitions">DÉFINITIONS</a>
+  <a href="#donnees">DONNÉES</a>
+  <a href="#preprocessing">PRÉTRAITEMENT</a>
+  <a href="#apprentissage">TYPES D'APPR.</a>
+  <a href="#algorithmes">ALGORITHMES</a>
+  <a href="#etapes">ÉTAPES ML</a>
+  <a href="#overfitting">OVERFITTING</a>
+  <a href="#mldl">ML vs DL</a>
+  <a href="#confusion">MATRICE</a>
+  <a href="#python">PYTHON</a>
+  <a href="#examens">QUESTIONS EXAM</a>
+</nav>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 0 — CARTE MENTALE GLOBALE -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="map">
+  <div class="section-header">
+    <span class="section-number">00</span>
+    <h2 class="section-title">Carte Mentale — Vue d'ensemble du module</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="tree">
+      <div class="tree-root">🧠 CHAPITRE 1 — Introduction à l'IA</div>
+      <div class="tree-branch">
+        <div class="tree-node">L'intelligence</div>
+        <div class="tree-leaf">Compréhension + Apprentissage</div>
+        <div class="tree-node">Définition de l'IA</div>
+        <div class="tree-leaf">Imitation de l'intelligence humaine</div>
+        <div class="tree-node">Niveaux d'IA</div>
+        <div class="tree-leaf">Faible / Forte / Super-intelligente</div>
+        <div class="tree-node">Domaines de l'IA</div>
+        <div class="tree-leaf">NLP / Computer Vision / Robotique / ML / DL</div>
+        <div class="tree-node">3 éléments de l'IA</div>
+        <div class="tree-leaf">Données / Algorithmes / Puissance de calcul</div>
+        <div class="tree-node">Types de données</div>
+        <div class="tree-leaf">Structurées / Semi-structurées / Non-structurées</div>
+        <div class="tree-node">Big Data (5V)</div>
+        <div class="tree-leaf">Volume / Velocité / Variété / Véracité / Valeur</div>
+        <div class="tree-node">Prétraitement</div>
+        <div class="tree-leaf">Imputation / Encodage / Normalisation / Feature Eng.</div>
+      </div>
+    </div>
+    <div class="tree">
+      <div class="tree-root">⚙️ CHAPITRE 3 — Machine Learning</div>
+      <div class="tree-branch">
+        <div class="tree-node">Définition ML</div>
+        <div class="tree-leaf">Apprentissage sans prog. explicite</div>
+        <div class="tree-node">Modèle f(x)</div>
+        <div class="tree-leaf">Fonction qui apprend à partir de X → Y</div>
+        <div class="tree-node">Apprentissage supervisé</div>
+        <div class="tree-leaf">Données étiquetées → Classification / Régression</div>
+        <div class="tree-node">Apprentissage non supervisé</div>
+        <div class="tree-leaf">Données brutes → Clustering / Réduction dim.</div>
+        <div class="tree-node">Semi-supervisé</div>
+        <div class="tree-leaf">Mix données étiquetées + non étiquetées</div>
+        <div class="tree-node">Par renforcement</div>
+        <div class="tree-leaf">Récompenses / Pénalités → Agent apprend</div>
+        <div class="tree-node">Overfitting / Underfitting</div>
+        <div class="tree-leaf">Surapprentissage / Sous-apprentissage</div>
+        <div class="tree-node">ML vs DL</div>
+        <div class="tree-leaf">Réseaux de neurones profonds / Feature auto</div>
+        <div class="tree-node">8 étapes d'un projet ML</div>
+        <div class="tree-leaf">Définition → Collecte → EDA → Split → Modèle → Train → Éval → Déploiement</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 1 — DÉFINITIONS CLÉS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="definitions">
+  <div class="section-header">
+    <span class="section-number">01</span>
+    <h2 class="section-title">Définitions Clés — À connaître parfaitement</h2>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">⚠️</span>
+    <span>La prof demande souvent : <em>"Définissez les éléments suivants : IA, ML, DL"</em> et <em>"Expliquez la relation entre IA, ML, DL et IA générative"</em>. Ces définitions doivent être précises et hiérarchisées.</span>
+  </div>
+
+  <div class="def-block">
+    <div class="def-term">Intelligence</div>
+    L'intelligence est liée à l'être humain, à travers ses <strong>facultés de compréhension et d'apprentissage</strong>, et elle est observable grâce à son comportement.<br>
+    <span class="formula">Intelligence = Compréhension + Apprentissage</span>
+    Elle englobe : capacité d'adaptation, de penser, d'assimiler des connaissances, de comprendre des relations, d'évaluation et de jugement.
+  </div>
+
+  <div class="def-block orange">
+    <div class="def-term orange">Intelligence Artificielle (IA)</div>
+    Ensemble des <strong>techniques mises en œuvre afin de construire des machines capables de faire preuve d'un comportement que l'on peut qualifier d'intelligent</strong>. C'est une <em>imitation</em> de l'intelligence humaine — pas une vraie intelligence.<br><br>
+    <span class="formula">Artificiel = Machine + Logiciel</span>
+  </div>
+
+  <div class="def-block green">
+    <div class="def-term green">Machine Learning (ML)</div>
+    Sous-domaine de l'IA qui donne à une machine la capacité <strong>d'apprendre sans être explicitement programmée</strong>. Il consiste à développer et entraîner un <strong>modèle mathématique</strong> à partir d'un ensemble de données d'apprentissage afin qu'il puisse généraliser et effectuer des prédictions sur de nouvelles données.
+  </div>
+
+  <div class="def-block red">
+    <div class="def-term red">Deep Learning (DL)</div>
+    Sous-domaine du Machine Learning reposant sur des <strong>réseaux de neurones artificiels multicouches</strong> (inspirés du cerveau humain). Il permet de résoudre des problèmes <strong>complexes</strong> à partir de grandes quantités de données <strong>non-structurées</strong> (images, texte, son). Il réalise automatiquement l'<strong>extraction de caractéristiques</strong> (contrairement au ML classique qui la fait manuellement).
+  </div>
+
+  <hr class="divider">
+
+  <h4>Relation hiérarchique IA → ML → DL → IA Générative</h4>
+  <div class="card">
+    <p style="text-align:center; font-family:'DM Mono', monospace; font-size: 13px; color: var(--text-muted); padding: 12px 0;">
+      <span style="color:var(--accent)">IA</span> (ensemble de techniques imitant l'intelligence humaine)<br>
+      <span style="color: var(--text-dim)">↓ inclut</span><br>
+      <span style="color:var(--accent3)">Machine Learning</span> (apprend à partir de données sans prog. explicite)<br>
+      <span style="color: var(--text-dim)">↓ inclut</span><br>
+      <span style="color:var(--accent2)">Deep Learning</span> (réseaux de neurones profonds pour données complexes)<br>
+      <span style="color: var(--text-dim)">↓ application</span><br>
+      <span style="color:var(--accent4)">IA Générative</span> (modèles capables de générer texte, images, code — ex: ChatGPT, DALL-E)
+    </p>
+  </div>
+
+  <hr class="divider">
+  <h4>Niveaux d'IA</h4>
+  <div class="grid-3">
+    <div class="card card-accent-green">
+      <div class="card-title"><span class="dot dot-green"></span>IA Faible (Étroite)</div>
+      <ul class="clean">
+        <li>Type le plus répandu aujourd'hui</li>
+        <li>Se concentre sur <strong>une tâche ou un domaine spécifique</strong></li>
+        <li>Très performante dans son domaine mais <strong>ne peut pas généraliser</strong></li>
+        <li>Exemples : Siri, Alexa, reconnaissance faciale, algorithmes de recommandation, chatbots, détection de maladies</li>
+      </ul>
+    </div>
+    <div class="card card-accent-orange">
+      <div class="card-title"><span class="dot dot-orange"></span>IA Forte (Générale)</div>
+      <ul class="clean">
+        <li><strong>Hypothétique, n'existe pas encore</strong></li>
+        <li>Capable d'accomplir n'importe quelle tâche intellectuelle humaine</li>
+        <li>Apprendre, raisonner, résoudre des problèmes complexes, s'adapter</li>
+        <li>Domaine de recherche actif</li>
+      </ul>
+    </div>
+    <div class="card card-accent-red">
+      <div class="card-title"><span class="dot dot-red"></span>IA Super-intelligente</div>
+      <ul class="clean">
+        <li>Dépasserait les capacités humaines dans <strong>tous les domaines</strong></li>
+        <li>Hypothèse futuriste</li>
+        <li>Explorée en science-fiction et recherche prospective</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h4>Les 3 éléments nécessaires au fonctionnement d'un système d'IA</h4>
+  <div class="grid-3">
+    <div class="card card-accent-purple">
+      <div class="card-title"><span class="dot dot-purple"></span>① Les Données</div>
+      <p>Nourrissent et entraînent les algorithmes. La qualité des données est critique — des données biaisées produisent des modèles inefficaces.</p>
+    </div>
+    <div class="card card-accent-orange">
+      <div class="card-title"><span class="dot dot-orange"></span>② Les Algorithmes</div>
+      <p>Permettent d'atteindre l'objectif grâce à des règles et des modèles. C'est le "cerveau" de l'IA.</p>
+    </div>
+    <div class="card card-accent-green">
+      <div class="card-title"><span class="dot dot-green"></span>③ La Puissance de Calcul</div>
+      <p>Pour traiter les données et exécuter les algorithmes. Détermine la taille du modèle, la vitesse d'entraînement et de prédiction.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 2 — DONNÉES -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="donnees">
+  <div class="section-header">
+    <span class="section-number">02</span>
+    <h2 class="section-title">Les Données — Types, Big Data</h2>
+  </div>
+
+  <h4>Types de données — À savoir par cœur (question de fill-in-the-blank fréquente)</h4>
+  <div class="grid-3">
+    <div class="card card-accent-green">
+      <div class="card-title"><span class="dot dot-green"></span>Données Structurées</div>
+      <ul class="clean">
+        <li>Format tabulaire (lignes et colonnes)</li>
+        <li>Tableaux Excel, bases SQL</li>
+        <li>Exemple : âge, prix, ventes, variables météo, indicateurs financiers</li>
+      </ul>
+    </div>
+    <div class="card card-accent-orange">
+      <div class="card-title"><span class="dot dot-orange"></span>Données Semi-structurées</div>
+      <ul class="clean">
+        <li>Champs variables, pas de schéma fixe</li>
+        <li><strong>Fichiers JSON, XML, logs</strong></li>
+        <li>Événements applicatifs</li>
+      </ul>
+    </div>
+    <div class="card card-accent-red">
+      <div class="card-title"><span class="dot dot-red"></span>Données Non-structurées</div>
+      <ul class="clean">
+        <li>Contenu libre, pas de format</li>
+        <li><strong>Textes, images, vidéos, audio, documents PDF</strong></li>
+        <li>Les plus complexes à traiter</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h4>Big Data — Les 5V (à connaître avec exemples)</h4>
+  <table>
+    <tr>
+      <th>V</th><th>Signification</th><th>Explication</th><th>Exemple</th>
+    </tr>
+    <tr>
+      <td><span class="highlight-purple">Volume</span></td>
+      <td>Quantité massive</td>
+      <td>Téraoctets, pétaoctets — outils classiques insuffisants</td>
+      <td>Réseaux sociaux, transactions bancaires, logs</td>
+    </tr>
+    <tr>
+      <td><span class="highlight-orange">Velocity</span></td>
+      <td>Vitesse de génération</td>
+      <td>Données générées en continu (streaming)</td>
+      <td>Transactions bancaires en temps réel, logs</td>
+    </tr>
+    <tr>
+      <td><span class="highlight-green">Variety</span></td>
+      <td>Diversité des formats</td>
+      <td>Structurées + semi-structurées + non-structurées</td>
+      <td>Tables, JSON, images, audio, vidéo</td>
+    </tr>
+    <tr>
+      <td><span class="highlight-red">Veracity</span></td>
+      <td>Fiabilité / qualité</td>
+      <td>Bruit, erreurs, doublons, valeurs manquantes</td>
+      <td>Données médicales avec saisies incorrectes</td>
+    </tr>
+    <tr>
+      <td><span class="highlight-purple">Value</span></td>
+      <td>Valeur utile</td>
+      <td>Transformer les données en information utile</td>
+      <td>Prédiction, optimisation, décision</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 3 — PRÉTRAITEMENT -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="preprocessing">
+  <div class="section-header">
+    <span class="section-number">03</span>
+    <h2 class="section-title">Prétraitement des Données — Détail Complet</h2>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">📌</span>
+    <span>La prof insiste : <em>"Le Machine Learning repose sur des opérations mathématiques. Les données doivent donc être converties en valeurs numériques pour être traitées."</em></span>
+  </div>
+
+  <p>Le prétraitement est l'ensemble des opérations qui visent à convertir les données primaires en un format exploitable pour le machine learning. Il protège aussi contre le surapprentissage.</p>
+
+  <hr class="divider">
+  <h4>① Imputation — Gestion des valeurs manquantes</h4>
+  <div class="def-block green">
+    <div class="def-term green">Définition</div>
+    Remplir les valeurs manquantes avec des mesures statistiques (moyenne, médiane) ou supprimer les lignes concernées. Les données manquantes faussent l'analyse et conduisent à des modèles inexacts.
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <p><strong>Méthode 1 : Compléter par la moyenne</strong></p>
+      <div class="code-block">
+<span class="nm">data</span>.<span class="fn">fillna</span>(<span class="nm">data</span>[<span class="st">'age'</span>].<span class="fn">mean</span>())
+<span class="c"># Remplace toutes les valeurs nulles de 'age' par la moyenne</span>
+      </div>
+    </div>
+    <div>
+      <p><strong>Méthode 2 : Supprimer les lignes avec valeurs manquantes</strong></p>
+      <div class="code-block">
+<span class="nm">data</span>.<span class="fn">dropna</span>(<span class="nm">axis</span>=<span class="st">0</span>)
+<span class="c"># Supprime toutes les lignes ayant au moins une valeur nulle</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h4>② Encodage — Conversion catégoriel → numérique</h4>
+  <div class="def-block orange">
+    <div class="def-term orange">Pourquoi encoder ?</div>
+    Le Machine Learning repose sur des opérations <strong>mathématiques</strong>. Il ne comprend que des données numériques. Les variables catégorielles (ex: "Normal"/"Suspect", "Homme"/"Femme") doivent être converties en valeurs numériques avant l'apprentissage.
+  </div>
+
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="dot dot-orange"></span>Label Encoding</div>
+      <p>Remplace chaque catégorie par un entier.</p>
+      <div class="code-block">
+Normal  → <span class="st">0</span>
+Suspect → <span class="st">1</span>
+      </div>
+      <p style="font-size:12px; color: var(--text-muted)">Utilisé pour variables binaires ou ordinales.</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot dot-orange"></span>One-Hot Encoding</div>
+      <p>Crée une colonne binaire pour chaque catégorie.</p>
+      <div class="code-block">
+Paiement en ligne → [1, 0, 0]
+ATM               → [0, 1, 0]
+Virement          → [0, 0, 1]
+      </div>
+      <p style="font-size:12px; color: var(--text-muted)">Utilisé pour variables nominales sans ordre.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h4>③ Feature Engineering — Ingénierie des Caractéristiques</h4>
+  <div class="def-block">
+    <div class="def-term">Objectif</div>
+    Créer ou sélectionner les variables les plus pertinentes à partir des données existantes, afin d'<strong>améliorer les performances du modèle</strong>. Comprend deux sous-étapes : l'<strong>Extraction</strong> et la <strong>Sélection</strong>.
+  </div>
+
+  <div class="compare">
+    <div class="compare-col">
+      <div class="compare-title" style="color: var(--accent3)">Feature Extraction (Extraction)</div>
+      <p>Générer de <strong>nouvelles variables</strong> à partir des informations cachées dans le jeu de données. Elle peut être faite :</p>
+      <ul class="clean">
+        <li>Globalement (sur tout le dataset)</li>
+        <li>Localement (par zones)</li>
+        <li>De façon hybride</li>
+        <li>Exemple : transformer une date en "jour de la semaine"</li>
+        <li>Exemple : calculer l'IMC à partir du poids et de la taille</li>
+        <li>Dans DL : la feature extraction est <strong>automatique</strong></li>
+        <li>Dans ML classique : elle est <strong>manuelle</strong> (via des descripteurs)</li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="compare-title" style="color: var(--accent2)">Feature Selection (Sélection)</div>
+      <p>Sélectionner les variables les plus <strong>utiles</strong> pour le modèle. Trop de variables = performances dégradées.</p>
+      <ul class="clean">
+        <li>Technique : Variance Threshold</li>
+        <li>Technique : SelectKBest</li>
+        <li>Technique : SelectFromModel</li>
+        <li>Exemple : sur un dataset médical avec 100 variables, ne garder que l'âge, les symptômes, les antécédents — éliminer la "couleur préférée"</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h4>④ Normalisation — Mise à l'échelle</h4>
+  <div class="def-block red">
+    <div class="def-term red">Principe</div>
+    Ramener toutes les valeurs numériques à la même échelle, souvent <strong>entre 0 et 1</strong>. Cela évite qu'une variable avec de grandes valeurs domine les autres lors de l'entraînement.
+  </div>
+  <div class="formula">x_normalisé = (x - x_min) / (x_max - x_min)</div>
+
+  <div class="card" style="margin-top: 12px;">
+    <div class="card-title"><span class="dot dot-red"></span>Algorithmes sensibles à la mise à l'échelle (à mémoriser)</div>
+    <div class="grid-3">
+      <div>
+        <ul class="clean">
+          <li>K-Nearest Neighbors (KNN)</li>
+          <li>SVM (Support Vector Machines)</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="clean">
+          <li>Régression Logistique</li>
+          <li>Réseaux de neurones (Deep Learning)</li>
+        </ul>
+      </div>
+      <div>
+        <ul class="clean">
+          <li>Méthodes basées sur les distances</li>
+          <li>PCA (réduction de dim.)</li>
+        </ul>
+      </div>
+    </div>
+    <div class="alert" style="margin-top: 10px;">
+      <span class="alert-icon">💡</span>
+      <span>Les arbres de décision (Decision Trees), Random Forest et les algorithmes basés sur des règles <strong>ne sont pas sensibles</strong> à la mise à l'échelle.</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 4 — TYPES D'APPRENTISSAGE -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="apprentissage">
+  <div class="section-header">
+    <span class="section-number">04</span>
+    <h2 class="section-title">Types d'Apprentissage — Différences Clés</h2>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">🎯</span>
+    <span>Questions fréquentes : <em>"Quelle est la différence entre l'apprentissage supervisé et non supervisé ?"</em>, <em>"Quelle est la différence entre la régression et la classification ?"</em>, <em>"Quel type d'apprentissage pour ce problème ?"</em></span>
+  </div>
+
+  <!-- SUPERVISÉ -->
+  <div class="card card-accent-purple" style="margin-bottom: 16px;">
+    <div class="card-title"><span class="dot dot-purple"></span>Apprentissage Supervisé (Supervised Learning)</div>
+    <p><strong>Définition :</strong> Le paradigme le plus populaire en ML. La machine reçoit des données <strong>étiquetées (X et Y)</strong>. Elle apprend à prédire Y en fonction de X. On supervise l'apprentissage en montrant à la machine des exemples avec les bonnes réponses.</p>
+    <div class="compare" style="margin-top: 12px;">
+      <div class="compare-col">
+        <div class="compare-title" style="color: var(--accent)">Régression</div>
+        <p>La sortie Y est une <strong>variable continue (numérique)</strong>.</p>
+        <ul class="clean">
+          <li>Prédire le prix d'un appartement</li>
+          <li>Prédire le montant des ventes</li>
+          <li>Prédire la consommation électrique</li>
+          <li>Algorithmes : Régression Linéaire, Random Forest, XGBoost</li>
+          <li>Métriques : MAE, MSE</li>
+        </ul>
+      </div>
+      <div class="compare-col">
+        <div class="compare-title" style="color: var(--accent3)">Classification</div>
+        <p>La sortie Y est une <strong>variable catégorielle (discrète)</strong>.</p>
+        <ul class="clean">
+          <li>Email spam / non-spam</li>
+          <li>Transaction frauduleuse / normale</li>
+          <li>Accord ou refus d'un crédit</li>
+          <li>Tumeur maligne ou bénigne</li>
+          <li>Algorithmes : SVM, KNN, Régression Logistique, Random Forest</li>
+          <li>Métriques : Accuracy, Précision, Recall</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- NON SUPERVISÉ -->
+  <div class="card card-accent-orange" style="margin-bottom: 16px;">
+    <div class="card-title"><span class="dot dot-orange"></span>Apprentissage Non Supervisé (Unsupervised Learning)</div>
+    <p><strong>Définition :</strong> L'algorithme analyse des données <strong>brutes, non étiquetées (seulement X, sans Y)</strong>. Il découvre par lui-même des structures, groupes ou motifs cachés. La machine cherche les points communs pour former des groupes.</p>
+    <div class="grid-3" style="margin-top: 12px;">
+      <div class="card" style="background: var(--surface);">
+        <div class="card-title" style="font-size: 12px;"><span class="dot dot-orange"></span>Clustering (Regroupement)</div>
+        <ul class="clean">
+          <li>Regrouper les données selon leur ressemblance</li>
+          <li>Segmentation de clients</li>
+          <li>Détection d'anomalies <strong>sans label</strong></li>
+          <li>Filtrage automatique d'emails</li>
+          <li>Algorithmes : <strong>K-Means</strong>, DBSCAN, Agglomerative, GMM, Mean Shift, Spectral</li>
+        </ul>
+      </div>
+      <div class="card" style="background: var(--surface);">
+        <div class="card-title" style="font-size: 12px;"><span class="dot dot-orange"></span>Réduction de Dimensionnalité</div>
+        <ul class="clean">
+          <li>Réduire le nombre de caractéristiques</li>
+          <li>Conserver l'information utile, éliminer la redondance</li>
+          <li>Accélère l'apprentissage</li>
+          <li>Évite l'overfitting (fléau de la dimension)</li>
+          <li>Algorithmes : <strong>PCA</strong>, ICA, LDA, KPCA, Isomap, MDS</li>
+        </ul>
+      </div>
+      <div class="card" style="background: var(--surface);">
+        <div class="card-title" style="font-size: 12px;"><span class="dot dot-orange"></span>Règles d'Association</div>
+        <ul class="clean">
+          <li>Identifier des relations entre variables</li>
+          <li>Données transactionnelles</li>
+          <li>Articles souvent achetés ensemble</li>
+          <li>Exemple : panier d'achat (Market Basket Analysis)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SEMI-SUPERVISÉ -->
+  <div class="card card-accent-green" style="margin-bottom: 16px;">
+    <div class="card-title"><span class="dot dot-green"></span>Apprentissage Semi-supervisé</div>
+    <p><strong>Définition :</strong> Mélange de données <strong>étiquetées (peu)</strong> + données <strong>non étiquetées (beaucoup)</strong>. Utilisé quand les labels sont coûteux à obtenir.</p>
+    <ul class="clean">
+      <li>Applications : classification d'images quand les labels sont coûteux, détection de comportements anormaux, analyse forestière avec peu de données terrain</li>
+    </ul>
+  </div>
+
+  <!-- PAR RENFORCEMENT -->
+  <div class="card card-accent-red">
+    <div class="card-title"><span class="dot dot-red"></span>Apprentissage par Renforcement</div>
+    <p><strong>Définition :</strong> Un agent apprend en interagissant avec un environnement, en recevant des <strong>récompenses</strong> pour les bonnes actions et des <strong>pénalités</strong> pour les mauvaises.</p>
+    <ul class="clean">
+      <li>Applications : jeux vidéo, robotique, voitures autonomes, trading</li>
+      <li>Algorithmes : <strong>Q-Learning</strong>, Deep Q-Network (DQN), Proximal Policy Optimization (PPO)</li>
+    </ul>
+  </div>
+
+  <hr class="divider">
+
+  <h4>Tableau de différenciation supervisé vs non supervisé (question d'examen type)</h4>
+  <table>
+    <tr>
+      <th>Critère</th><th>Supervisé</th><th>Non supervisé</th>
+    </tr>
+    <tr>
+      <td>Données utilisées</td>
+      <td>Étiquetées (X et Y)</td>
+      <td>Non étiquetées (X seulement)</td>
+    </tr>
+    <tr>
+      <td>Objectif</td>
+      <td>Prédire Y pour de nouvelles données</td>
+      <td>Découvrir la structure cachée dans les données</td>
+    </tr>
+    <tr>
+      <td>Tâches</td>
+      <td>Classification, Régression</td>
+      <td>Clustering, Réduction de dim., Règles d'association</td>
+    </tr>
+    <tr>
+      <td>Y (sortie)</td>
+      <td>Donné avec les données d'entraînement</td>
+      <td>Découvert par la machine elle-même</td>
+    </tr>
+    <tr>
+      <td>Exemple</td>
+      <td>Détecter une fraude (avec labels Normal/Suspect)</td>
+      <td>Segmenter des clients sans catégories prédéfinies</td>
+    </tr>
+    <tr>
+      <td>Algorithmes types</td>
+      <td>SVM, KNN, Régression Logistique, Random Forest</td>
+      <td>K-Means, DBSCAN, PCA, GMM</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 5 — ALGORITHMES CLASSIFIÉS -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="algorithmes">
+  <div class="section-header">
+    <span class="section-number">05</span>
+    <h2 class="section-title">Tous les Algorithmes — Classés par Type</h2>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">🎯</span>
+    <span>Exercice type : <em>"Classez les algorithmes suivants selon le type d'apprentissage : supervisé, non supervisé, par renforcement."</em> — Elle donne une liste et vous devez les placer dans la bonne colonne.</span>
+  </div>
+
+  <table>
+    <tr>
+      <th>Algorithme</th>
+      <th>Type</th>
+      <th>Tâche</th>
+      <th>Description courte</th>
+    </tr>
+    <!-- SUPERVISÉS -->
+    <tr>
+      <td><strong>Régression Linéaire</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span></td>
+      <td>Régression</td>
+      <td>Modélise la relation linéaire entre X et Y continu. ex: prix d'une maison = f(surface)</td>
+    </tr>
+    <tr>
+      <td><strong>Régression Logistique</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span></td>
+      <td>Classification</td>
+      <td>Classification binaire ou multi-classes. Malgré son nom, c'est un algorithme de classification.</td>
+    </tr>
+    <tr>
+      <td><strong>SVM (Support Vector Machine)</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span></td>
+      <td>Classification / Régression</td>
+      <td>Trouve l'hyperplan optimal qui sépare les classes. Efficace pour classification binaire. Sensible à l'échelle.</td>
+    </tr>
+    <tr>
+      <td><strong>KNN (K-Nearest Neighbors)</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span></td>
+      <td>Classification / Régression</td>
+      <td>Classe un point selon ses K plus proches voisins. Très sensible à l'échelle des variables.</td>
+    </tr>
+    <tr>
+      <td><strong>Arbres de Décision</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span></td>
+      <td>Classification / Régression</td>
+      <td>Arbre de règles si/sinon. Interprétable. Non sensible à l'échelle.</td>
+    </tr>
+    <tr>
+      <td><strong>Random Forest</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span></td>
+      <td>Classification / Régression</td>
+      <td>Ensemble d'arbres de décision. Robuste, performant sur données tabulaires. Non sensible à l'échelle.</td>
+    </tr>
+    <tr>
+      <td><strong>Perceptron Multicouche (MLP)</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span></td>
+      <td>Classification / Régression</td>
+      <td>Réseau de neurones avec couches cachées. Base du Deep Learning.</td>
+    </tr>
+    <!-- NON SUPERVISÉS - CLUSTERING -->
+    <tr>
+      <td><strong>K-Means</strong></td>
+      <td><span class="tag-unsup">NON SUPERVISÉ</span></td>
+      <td>Clustering</td>
+      <td>Divise les données en K groupes basés sur la distance aux centroïdes. L'algo de clustering le plus utilisé.</td>
+    </tr>
+    <tr>
+      <td><strong>DBSCAN</strong></td>
+      <td><span class="tag-unsup">NON SUPERVISÉ</span></td>
+      <td>Clustering</td>
+      <td>Clustering basé sur la densité. Détecte les outliers automatiquement. Ne nécessite pas de spécifier K.</td>
+    </tr>
+    <tr>
+      <td><strong>Agglomerative Clustering</strong></td>
+      <td><span class="tag-unsup">NON SUPERVISÉ</span></td>
+      <td>Clustering hiérarchique</td>
+      <td>Fusionne progressivement les points les plus proches jusqu'à former un dendrogramme.</td>
+    </tr>
+    <tr>
+      <td><strong>GMM (Gaussian Mixture Models)</strong></td>
+      <td><span class="tag-unsup">NON SUPERVISÉ</span></td>
+      <td>Clustering probabiliste</td>
+      <td>Modèle probabiliste basé sur des distributions gaussiennes. Plus flexible que K-Means.</td>
+    </tr>
+    <tr>
+      <td><strong>Mean Shift</strong></td>
+      <td><span class="tag-unsup">NON SUPERVISÉ</span></td>
+      <td>Clustering</td>
+      <td>Cherche les modes (pics de densité) dans les données.</td>
+    </tr>
+    <tr>
+      <td><strong>Spectral Clustering</strong></td>
+      <td><span class="tag-unsup">NON SUPERVISÉ</span></td>
+      <td>Clustering</td>
+      <td>Utilise les valeurs propres d'une matrice de similarité. Bon pour clusters non-convexes.</td>
+    </tr>
+    <!-- NON SUPERVISÉS - DIM REDUCTION -->
+    <tr>
+      <td><strong>PCA (Analyse en Composantes Principales)</strong></td>
+      <td><span class="tag-unsup">NON SUPERVISÉ</span></td>
+      <td>Réduction de dimensionnalité</td>
+      <td>Projette les données dans un espace de dimension réduite en conservant l'info maximale.</td>
+    </tr>
+    <tr>
+      <td><strong>ICA, LDA, MDS, Isomap, KPCA</strong></td>
+      <td><span class="tag-unsup">NON SUPERVISÉ</span></td>
+      <td>Réduction de dimensionnalité</td>
+      <td>Autres techniques de réduction. LDA = supervisé dans certains contextes.</td>
+    </tr>
+    <!-- DEEP LEARNING -->
+    <tr>
+      <td><strong>CNN (Convolutional Neural Network)</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span> (DL)</td>
+      <td>Classification d'images, Computer Vision</td>
+      <td>Réseaux de neurones avec couches de convolution. Très performant pour les images.</td>
+    </tr>
+    <tr>
+      <td><strong>LSTM (Long Short-Term Memory)</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span> (DL)</td>
+      <td>Séquences, NLP, Séries temporelles</td>
+      <td>Réseau récurrent capable de mémoriser des dépendances à long terme.</td>
+    </tr>
+    <tr>
+      <td><strong>RNN (Recurrent Neural Network)</strong></td>
+      <td><span class="tag-sup">SUPERVISÉ</span> (DL)</td>
+      <td>Séquences, texte, audio</td>
+      <td>Réseau avec boucles permettant de traiter des données séquentielles.</td>
+    </tr>
+    <!-- RENFORCEMENT -->
+    <tr>
+      <td><strong>Q-Learning</strong></td>
+      <td><span class="tag-rl">RENFORCEMENT</span></td>
+      <td>Prise de décision séquentielle</td>
+      <td>Agent apprend une politique optimale via une table Q de récompenses.</td>
+    </tr>
+    <tr>
+      <td><strong>Deep Q-Network (DQN)</strong></td>
+      <td><span class="tag-rl">RENFORCEMENT</span></td>
+      <td>Jeux, robotique</td>
+      <td>Q-Learning combiné avec un réseau de neurones profonds. Utilisé par DeepMind pour jouer aux jeux Atari.</td>
+    </tr>
+    <tr>
+      <td><strong>PPO (Proximal Policy Optimization)</strong></td>
+      <td><span class="tag-rl">RENFORCEMENT</span></td>
+      <td>Robotique, jeux, NLP</td>
+      <td>Algorithme de politique d'optimisation stable et efficace. Utilisé dans ChatGPT (RLHF).</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 6 — 8 ÉTAPES ML -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="etapes">
+  <div class="section-header">
+    <span class="section-number">06</span>
+    <h2 class="section-title">Les 8 Étapes d'un Projet Machine Learning</h2>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">🎯</span>
+    <span>Question fréquente : <em>"Décrivez les principales étapes d'un projet ML pour construire un modèle de détection de transactions suspectes."</em> Ces 8 étapes doivent être connues avec leur contenu.</span>
+  </div>
+
+  <div class="step-row"><span class="step-num">1</span>
+    <div>
+      <strong>Définition du Problème</strong>
+      <p>Comprendre le besoin réel, définir le cadre de travail, identifier l'objectif métier. Déterminer le type d'apprentissage (supervisé ? classification ou régression ? ou non supervisé ?). <em>Exemple : prédire si une transaction est normale ou suspecte → classification binaire supervisée.</em></p>
+    </div>
+  </div>
+  <div class="step-row"><span class="step-num">2</span>
+    <div>
+      <strong>Collecte et Préparation des Données</strong>
+      <p>Rassembler les données pertinentes depuis bases SQL, APIs, fichiers CSV, Kaggle, web scraping, logs... Nettoyer les données : gérer les valeurs manquantes (imputation ou suppression), encoder les variables catégorielles, normaliser les variables numériques.</p>
+    </div>
+  </div>
+  <div class="step-row"><span class="step-num">3</span>
+    <div>
+      <strong>Exploration des Données (EDA — Exploratory Data Analysis)</strong>
+      <p>Analyser la structure, les types de variables, les statistiques descriptives (moyenne, médiane, min/max). Identifier les valeurs manquantes. Visualiser la distribution des données avec Matplotlib/Seaborn. <em>Un bon EDA = 50% du travail. Il peut orienter le choix du modèle.</em></p>
+    </div>
+  </div>
+  <div class="step-row"><span class="step-num">4</span>
+    <div>
+      <strong>Séparation des Données (Train / Test Split)</strong>
+      <p>Diviser le dataset en ensemble d'entraînement (80%) et ensemble de test (20%). On peut aussi avoir un ensemble de validation. Utiliser <code>train_test_split</code> de Scikit-learn. Le paramètre <code>random_state</code> fixe la division pour la reproductibilité.</p>
+    </div>
+  </div>
+  <div class="step-row"><span class="step-num">5</span>
+    <div>
+      <strong>Choix du Modèle (Algorithme)</strong>
+      <p>Dépend du type de problème, de la forme des données, de la complexité, des objectifs. Régression → Régression Linéaire, Random Forest, XGBoost. Classification → SVM, KNN, Régression Logistique, Random Forest. Clustering → K-Means, DBSCAN.</p>
+    </div>
+  </div>
+  <div class="step-row"><span class="step-num">6</span>
+    <div>
+      <strong>Entraînement du Modèle</strong>
+      <p>Le modèle apprend à partir de <strong>X_train et Y_train</strong> via la fonction <code>fit()</code>. Il ajuste ses paramètres (poids, coefficients) pour minimiser la fonction de perte (loss function). La loss function compare la prédiction du modèle avec la valeur réelle.</p>
+    </div>
+  </div>
+  <div class="step-row"><span class="step-num">7</span>
+    <div>
+      <strong>Évaluation et Optimisation</strong>
+      <p>Tester le modèle sur <strong>X_test</strong>, comparer Y_prédit avec Y_test réel. Métriques de classification : accuracy, précision, recall, F1-score, matrice de confusion. Métriques de régression : MAE, MSE, RMSE. Ajuster les hyperparamètres si nécessaire (ex: nombre d'arbres dans Random Forest, valeur de K dans KNN).</p>
+    </div>
+  </div>
+  <div class="step-row"><span class="step-num">8</span>
+    <div>
+      <strong>Déploiement et Suivi</strong>
+      <p>Rendre le modèle accessible à des utilisateurs, à une application ou à un système (déploiement en production). Surveiller ses performances et le mettre à jour régulièrement avec de nouvelles données si nécessaire.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 7 — OVERFITTING / UNDERFITTING -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="overfitting">
+  <div class="section-header">
+    <span class="section-number">07</span>
+    <h2 class="section-title">Overfitting & Underfitting — Les ennemis du ML</h2>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">🎯</span>
+    <span>Question fréquente : <em>"Un modèle donne : Train = 98% et Test = 60%. Identifiez le problème et proposez une solution."</em> — La prof donne cet exemple exact dans ses examens.</span>
+  </div>
+
+  <div class="grid-3">
+    <div class="card card-accent-red">
+      <div class="card-title"><span class="dot dot-red"></span>Overfitting (Surapprentissage)</div>
+      <p><strong>Définition :</strong> Le modèle mémorise les données d'entraînement au lieu d'apprendre les patterns généraux.</p>
+      <p><strong>Signe :</strong> Performances train très élevées + performances test faibles.</p>
+      <div class="formula" style="font-size:12px;">Train = 98% | Test = 60% → OVERFITTING</div>
+      <p><strong>Le modèle ne peut pas être utilisé sur de nouvelles données !</strong></p>
+      <p><strong>Solutions :</strong></p>
+      <ul class="clean">
+        <li>Ajouter plus de données d'entraînement</li>
+        <li>Réduire la complexité du modèle</li>
+        <li>Utiliser la réduction de dimensionnalité</li>
+        <li>Utiliser la régularisation (L1, L2)</li>
+        <li>Utiliser la cross-validation</li>
+        <li>Dropout (pour les réseaux de neurones)</li>
+      </ul>
+    </div>
+    <div class="card card-accent-orange">
+      <div class="card-title"><span class="dot dot-orange"></span>Underfitting (Sous-apprentissage)</div>
+      <p><strong>Définition :</strong> Le modèle n'arrive pas à s'adapter aux données d'apprentissage. Il est trop simple.</p>
+      <p><strong>Signe :</strong> Mauvaises performances sur les données d'entraînement ET de test.</p>
+      <div class="formula" style="font-size:12px;">Train = 55% | Test = 50% → UNDERFITTING</div>
+      <p><strong>Solutions :</strong></p>
+      <ul class="clean">
+        <li>Augmenter la complexité du modèle</li>
+        <li>Ajouter de nouvelles features</li>
+        <li>Réduire la régularisation</li>
+        <li>Entraîner plus longtemps</li>
+      </ul>
+    </div>
+    <div class="card card-accent-green">
+      <div class="card-title"><span class="dot dot-green"></span>Bon Modèle (Idéal)</div>
+      <p><strong>Définition :</strong> Performances proches entre train et test. Le modèle généralise bien.</p>
+      <div class="formula" style="font-size:12px;">Train = 90% | Test = 88% → IDÉAL ✓</div>
+      <p>Les valeurs ne doivent pas être égales, mais très proches. Une grande différence = problème.</p>
+      <p><strong>Technique K-Fold Cross-Validation :</strong><br>
+      L'ensemble de données est divisé en <strong>k ensembles de tailles presque égales</strong>. On entraîne k fois en changeant l'ensemble de validation. Cela améliore la fiabilité de l'évaluation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 8 — ML vs DL -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="mldl">
+  <div class="section-header">
+    <span class="section-number">08</span>
+    <h2 class="section-title">Machine Learning vs Deep Learning — Différences Complètes</h2>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">🎯</span>
+    <span>La prof dit : <em>"Il ne faut pas me dire seulement que Deep Learning est un sous-domaine de Machine Learning. Il faut compléter la phrase. Il faut donner une réponse complète."</em></span>
+  </div>
+
+  <table>
+    <tr>
+      <th>Critère</th><th>Machine Learning (ML)</th><th>Deep Learning (DL)</th>
+    </tr>
+    <tr>
+      <td>Relation</td>
+      <td>Sous-domaine de l'IA</td>
+      <td><strong>Sous-domaine du Machine Learning</strong></td>
+    </tr>
+    <tr>
+      <td>Architecture</td>
+      <td>Algorithmes classiques (SVM, Random Forest, etc.)</td>
+      <td>Réseaux de neurones artificiels <strong>multicouches</strong> (Deep ANN)</td>
+    </tr>
+    <tr>
+      <td>Feature Engineering</td>
+      <td><strong>Manuelle</strong> — Un expert extrait les features via des descripteurs, puis un algo ML fait la classification</td>
+      <td><strong>Automatique</strong> — L'algo fait lui-même l'extraction ET la classification en une seule étape</td>
+    </tr>
+    <tr>
+      <td>Quantité de données</td>
+      <td>Fonctionne avec des <strong>données modérées</strong></td>
+      <td>Nécessite de <strong>grandes quantités de données</strong></td>
+    </tr>
+    <tr>
+      <td>Complexité des problèmes</td>
+      <td>Problèmes <strong>moins complexes</strong>, données structurées/tabulaires</td>
+      <td>Problèmes <strong>très complexes</strong>, données non structurées (images, texte, son)</td>
+    </tr>
+    <tr>
+      <td>Type de données</td>
+      <td>Surtout structurées/tabulaires</td>
+      <td>Non-structurées : images, texte, audio, vidéo</td>
+    </tr>
+    <tr>
+      <td>Puissance de calcul</td>
+      <td>CPU standard suffisant</td>
+      <td>Nécessite des <strong>GPU puissants</strong></td>
+    </tr>
+    <tr>
+      <td>Interprétabilité</td>
+      <td>Plus interprétable (ex: arbres de décision)</td>
+      <td>Boîte noire, moins interprétable</td>
+    </tr>
+    <tr>
+      <td>Algorithmes exemples</td>
+      <td>SVM, Random Forest, KNN, K-Means, PCA, Régression Linéaire</td>
+      <td>CNN, LSTM, RNN, Transformers, MLP profond</td>
+    </tr>
+    <tr>
+      <td>Applications</td>
+      <td>Prédiction prix, détection fraude, segmentation clients</td>
+      <td>Reconnaissance faciale, traduction automatique, ChatGPT, DALL-E</td>
+    </tr>
+  </table>
+
+  <hr class="divider">
+  <h4>Schéma simple ML vs DL (à reproduire à l'examen)</h4>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title" style="color: var(--accent3);">Flux ML classique</div>
+      <p style="font-family:'DM Mono',monospace; font-size:12px; color: var(--text-muted); text-align:center; line-height: 2.2;">
+        Image d'entrée<br>↓<br>
+        <span style="color:var(--accent2)">Feature Extraction (MANUELLE)</span><br>
+        (descripteur : yeux, nez, bouche)<br>↓<br>
+        <span style="color:var(--accent3)">Algorithme ML</span><br>
+        (SVM, Random Forest...)<br>↓<br>
+        <span style="color:#fff">Décision : chat / chien / visage</span>
+      </p>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color: var(--accent4);">Flux Deep Learning</div>
+      <p style="font-family:'DM Mono',monospace; font-size:12px; color: var(--text-muted); text-align:center; line-height: 2.2;">
+        Image d'entrée<br>↓<br>
+        <span style="color:var(--accent4)">Algorithme DL (CNN)</span><br>
+        ↓<br>
+        <span style="color:var(--accent2)">Feature Extraction AUTOMATIQUE</span><br>
+        +<br>
+        <span style="color:var(--accent3)">Classification INTÉGRÉE</span><br>
+        ↓<br>
+        <span style="color:#fff">Décision : chat / chien / visage</span>
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 9 — MATRICE DE CONFUSION -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="confusion">
+  <div class="section-header">
+    <span class="section-number">09</span>
+    <h2 class="section-title">Matrice de Confusion — Erreur Type I et Type II</h2>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <h4>La Matrice de Confusion</h4>
+      <table>
+        <tr>
+          <th></th><th>Prédit : Positif</th><th>Prédit : Négatif</th>
+        </tr>
+        <tr>
+          <td><strong>Réel : Positif</strong></td>
+          <td style="background: rgba(106,247,200,.1); color: var(--accent3);"><strong>VP (True Positive)</strong><br>Bonne prédiction positive</td>
+          <td style="background: rgba(247,106,138,.1); color: var(--accent4);"><strong>FN (False Negative)</strong><br>Erreur de Type II</td>
+        </tr>
+        <tr>
+          <td><strong>Réel : Négatif</strong></td>
+          <td style="background: rgba(247,178,106,.1); color: var(--accent2);"><strong>FP (False Positive)</strong><br>Erreur de Type I</td>
+          <td style="background: rgba(106,247,200,.1); color: var(--accent3);"><strong>VN (True Negative)</strong><br>Bonne prédiction négative</td>
+        </tr>
+      </table>
+    </div>
+    <div>
+      <h4>Erreur Type I vs Erreur Type II</h4>
+      <div class="def-block orange">
+        <div class="def-term orange">Erreur de Type I = False Positive (FP)</div>
+        La <strong>prédiction est POSITIVE</strong> alors que la valeur réelle est <strong>NÉGATIVE</strong>.<br>
+        <em>Exemple :</em> Le modèle dit "fraude" mais la transaction est normale.
+      </div>
+      <div class="def-block red">
+        <div class="def-term red">Erreur de Type II = False Negative (FN)</div>
+        La <strong>prédiction est NÉGATIVE</strong> alors que la valeur réelle est <strong>POSITIVE</strong>.<br>
+        <em>Exemple :</em> Le modèle dit "normale" mais la transaction est frauduleuse.
+      </div>
+    </div>
+  </div>
+
+  <h4>Métriques d'évaluation</h4>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title"><span class="dot dot-green"></span>Classification</div>
+      <div class="formula">Accuracy = (VP + VN) / (VP + VN + FP + FN)</div>
+      <div class="formula">Précision = VP / (VP + FP)</div>
+      <div class="formula">Recall = VP / (VP + FN)</div>
+      <p style="font-size:12px; color: var(--text-muted);">Recall = Sensibilité. Important quand les faux négatifs sont critiques (ex: cancer, fraude).</p>
+    </div>
+    <div class="card">
+      <div class="card-title"><span class="dot dot-orange"></span>Régression</div>
+      <div class="formula">MAE = moyenne |y_réel - y_prédit|</div>
+      <div class="formula">MSE = moyenne (y_réel - y_prédit)²</div>
+      <div class="formula">RMSE = √MSE</div>
+      <p style="font-size:12px; color: var(--text-muted);">MAE = Mean Absolute Error. MSE = Mean Squared Error. RMSE pénalise plus les grandes erreurs.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 10 — PYTHON & SEABORN VS MATPLOTLIB -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="python">
+  <div class="section-header">
+    <span class="section-number">10</span>
+    <h2 class="section-title">Python — Fonctions, Bibliothèques & Seaborn vs Matplotlib</h2>
+  </div>
+
+  <h4>Seaborn vs Matplotlib — Question fréquente</h4>
+  <div class="compare">
+    <div class="compare-col">
+      <div class="compare-title" style="color: var(--accent);">Matplotlib</div>
+      <ul class="clean">
+        <li>Bibliothèque de visualisation de <strong>base</strong> en Python</li>
+        <li>Permet de créer des graphiques variés : histogrammes, courbes, scatter plots, barplots...</li>
+        <li>Plus de code nécessaire pour un résultat esthétique</li>
+        <li>Import : <code>import matplotlib.pyplot as plt</code></li>
+        <li>Usage : <code>plt.scatter(x, y)</code>, <code>plt.show()</code></li>
+      </ul>
+    </div>
+    <div class="compare-col">
+      <div class="compare-title" style="color: var(--accent3);">Seaborn</div>
+      <ul class="clean">
+        <li><strong>Extension de Matplotlib</strong>, plus puissante et plus esthétique par défaut</li>
+        <li>Spécialisée pour les graphiques <strong>statistiques</strong></li>
+        <li>Graphiques relationnels entre variables, distributions, heatmaps facilement</li>
+        <li>Permet d'automatiser la création de graphiques → travail plus rapide</li>
+        <li>Import : <code>import seaborn as sns</code></li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h4>Fonctions clés Pandas — Rôles à connaître (question type)</h4>
+  <table>
+    <tr><th>Fonction / Attribut</th><th>Rôle</th><th>Exemple</th></tr>
+    <tr><td><code>pd.read_csv()</code></td><td>Lire un fichier CSV dans un DataFrame</td><td><code>df = pd.read_csv('data.csv')</code></td></tr>
+    <tr><td><code>df.head(n)</code></td><td>Afficher les <strong>n premières lignes</strong> (5 par défaut)</td><td><code>df.head()</code></td></tr>
+    <tr><td><code>df.tail(n)</code></td><td>Afficher les <strong>n dernières lignes</strong></td><td><code>df.tail()</code></td></tr>
+    <tr><td><code>df.shape</code></td><td>Afficher les <strong>dimensions</strong> (nb lignes, nb colonnes)</td><td><code>(30, 2)</code> → 30 lignes, 2 colonnes</td></tr>
+    <tr><td><code>df.describe()</code></td><td>Afficher les <strong>statistiques descriptives</strong> (moyenne, médiane, min, max, quartiles)</td><td><code>df.describe()</code></td></tr>
+    <tr><td><code>df.info()</code></td><td>Afficher les <strong>informations générales</strong> : types de colonnes, valeurs nulles</td><td><code>df.info()</code></td></tr>
+    <tr><td><code>df.isnull().sum()</code> ou <code>df.isna()</code></td><td>Vérifier et compter les <strong>valeurs manquantes</strong></td><td><code>df.isnull().sum()</code></td></tr>
+    <tr><td><code>df.fillna(val)</code></td><td><strong>Remplir les valeurs manquantes</strong> par une valeur ou statistique</td><td><code>df.fillna(df['age'].mean())</code></td></tr>
+    <tr><td><code>df.dropna(axis=0)</code></td><td><strong>Supprimer les lignes</strong> avec valeurs manquantes</td><td><code>df.dropna()</code></td></tr>
+    <tr><td><code>df['colonne']</code></td><td>Accéder à une <strong>colonne</strong> du DataFrame</td><td><code>df['prix']</code></td></tr>
+    <tr><td><code>df.drop('col', axis=1)</code></td><td><strong>Supprimer une colonne</strong></td><td><code>df.drop('prix', axis=1)</code></td></tr>
+    <tr><td><code>df.columns</code></td><td>Afficher les <strong>noms des colonnes</strong></td><td><code>df.columns</code></td></tr>
+  </table>
+
+  <hr class="divider">
+  <h4>Code complet d'un projet ML — Régression Linéaire (TP de la prof)</h4>
+  <div class="code-block">
+<span class="c"># ── IMPORTS ──────────────────────────────────────────────────</span>
+<span class="kw">import</span> <span class="nm">pandas</span> <span class="kw">as</span> <span class="nm">pd</span>
+<span class="kw">import</span> <span class="nm">matplotlib.pyplot</span> <span class="kw">as</span> <span class="nm">plt</span>
+<span class="kw">from</span> <span class="nm">sklearn.model_selection</span> <span class="kw">import</span> <span class="fn">train_test_split</span>
+<span class="kw">from</span> <span class="nm">sklearn</span> <span class="kw">import</span> <span class="nm">linear_model</span>
+<span class="kw">from</span> <span class="nm">sklearn.linear_model</span> <span class="kw">import</span> <span class="fn">LinearRegression</span>
+
+<span class="c"># ── ÉTAPE 1 : CHARGER LES DONNÉES ────────────────────────────</span>
+<span class="nm">df</span> = <span class="nm">pd</span>.<span class="fn">read_csv</span>(<span class="st">'chemin/vers/data.csv'</span>)
+
+<span class="c"># ── ÉTAPE 2 : EXPLORER LES DONNÉES ───────────────────────────</span>
+<span class="nm">df</span>.<span class="fn">head</span>()           <span class="c"># premières lignes</span>
+<span class="nm">df</span>.<span class="fn">tail</span>()           <span class="c"># dernières lignes</span>
+<span class="nm">df</span>.<span class="nm">shape</span>           <span class="c"># (nb_lignes, nb_colonnes)</span>
+<span class="nm">df</span>.<span class="fn">describe</span>()      <span class="c"># statistiques descriptives</span>
+<span class="nm">df</span>.<span class="fn">info</span>()           <span class="c"># types et valeurs nulles</span>
+<span class="nm">df</span>.<span class="fn">isnull</span>().<span class="fn">sum</span>() <span class="c"># valeurs manquantes par colonne</span>
+
+<span class="c"># ── ÉTAPE 3 : VISUALISATION (EDA) ────────────────────────────</span>
+<span class="nm">plt</span>.<span class="fn">scatter</span>(<span class="nm">df</span>[<span class="st">'surface'</span>], <span class="nm">df</span>[<span class="st">'prix'</span>])
+<span class="nm">plt</span>.<span class="fn">xlabel</span>(<span class="st">'Surface'</span>)
+<span class="nm">plt</span>.<span class="fn">ylabel</span>(<span class="st">'Prix'</span>)
+<span class="nm">plt</span>.<span class="fn">show</span>()
+
+<span class="c"># ── ÉTAPE 4 : SÉPARER X ET Y ─────────────────────────────────</span>
+<span class="nm">Y</span> = <span class="nm">df</span>[<span class="st">'prix'</span>]               <span class="c"># sortie (variable cible)</span>
+<span class="nm">X</span> = <span class="nm">df</span>.<span class="fn">drop</span>(<span class="st">'prix'</span>, <span class="nm">axis</span>=<span class="st">1</span>)  <span class="c"># features (caractéristiques)</span>
+
+<span class="c"># ── ÉTAPE 5 : DIVISER EN TRAIN / TEST ────────────────────────</span>
+<span class="nm">X_train</span>, <span class="nm">X_test</span>, <span class="nm">Y_train</span>, <span class="nm">Y_test</span> = <span class="fn">train_test_split</span>(
+    <span class="nm">X</span>, <span class="nm">Y</span>,
+    <span class="nm">test_size</span>=<span class="st">0.2</span>,         <span class="c"># 20% pour le test</span>
+    <span class="nm">random_state</span>=<span class="st">42</span>        <span class="c"># pour reproductibilité</span>
+)
+
+<span class="c"># ── ÉTAPE 6 : CHOISIR ET ENTRAÎNER ───────────────────────────</span>
+<span class="nm">modele</span> = <span class="fn">LinearRegression</span>()     <span class="c"># choisir l'algorithme</span>
+<span class="nm">modele</span>.<span class="fn">fit</span>(<span class="nm">X_train</span>, <span class="nm">Y_train</span>)    <span class="c"># entraîner (fit = apprendre)</span>
+
+<span class="c"># ── ÉTAPE 7 : PRÉDIRE ET ÉVALUER ─────────────────────────────</span>
+<span class="nm">Y_pred</span> = <span class="nm">modele</span>.<span class="fn">predict</span>(<span class="nm">X_test</span>)  <span class="c"># prédire sur X_test</span>
+<span class="c"># Comparer Y_pred avec Y_test pour mesurer la performance</span>
+  </div>
+
+  <hr class="divider">
+  <h4>Code Imputation — les deux méthodes avec Python (question fréquente)</h4>
+  <div class="grid-2">
+    <div>
+      <p><strong>Méthode 1 — Imputation par la moyenne</strong></p>
+      <div class="code-block">
+<span class="c"># Remplacer les valeurs manquantes d'une colonne</span>
+<span class="c"># par la moyenne de cette colonne</span>
+<span class="nm">df</span>[<span class="st">'age'</span>] = <span class="nm">df</span>[<span class="st">'age'</span>].<span class="fn">fillna</span>(<span class="nm">df</span>[<span class="st">'age'</span>].<span class="fn">mean</span>())
+
+<span class="c"># Ou par la médiane (plus robuste aux outliers)</span>
+<span class="nm">df</span>[<span class="st">'age'</span>] = <span class="nm">df</span>[<span class="st">'age'</span>].<span class="fn">fillna</span>(<span class="nm">df</span>[<span class="st">'age'</span>].<span class="fn">median</span>())
+      </div>
+    </div>
+    <div>
+      <p><strong>Méthode 2 — Suppression des lignes manquantes</strong></p>
+      <div class="code-block">
+<span class="c"># Supprimer toutes les lignes avec au moins</span>
+<span class="c"># une valeur manquante</span>
+<span class="nm">df</span> = <span class="nm">df</span>.<span class="fn">dropna</span>(<span class="nm">axis</span>=<span class="st">0</span>)
+
+<span class="c"># axis=0 → supprimer des lignes</span>
+<span class="c"># axis=1 → supprimer des colonnes</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 11 — QUESTIONS D'EXAMEN TYPE -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section" id="examens">
+  <div class="section-header">
+    <span class="section-number">11</span>
+    <h2 class="section-title">Questions d'Examen Types — Avec Réponses Complètes</h2>
+  </div>
+
+  <div class="alert">
+    <span class="alert-icon">💬</span>
+    <span>La prof a dit : <em>"Je vous demande de comprendre, pas d'apprendre."</em> — Comprenez les concepts et réécrivez-les avec vos propres mots. Ces réponses modèles sont à adapter, pas à copier mot pour mot.</span>
+  </div>
+
+  <!-- FILL IN THE BLANK -->
+  <h4>① Exercice type : Complétez les phrases (Fill in the blank)</h4>
+  <div class="card" style="margin-bottom: 16px;">
+    <table>
+      <tr><th>Phrase à compléter</th><th>Réponse</th></tr>
+      <tr><td>L'intelligence est une notion complexe qui englobe plusieurs capacités _______ et comportementales.</td><td><span class="highlight-green">Cognitives</span></td></tr>
+      <tr><td>Les systèmes d'IA étroite sont généralement _______ dans leur domaine.</td><td><span class="highlight-green">Performants</span></td></tr>
+      <tr><td>Mais ils ne sont pas capables de généraliser leurs _______ à d'autres tâches.</td><td><span class="highlight-green">Compétences</span></td></tr>
+      <tr><td>Les algorithmes de recommandation de produits sont une application de _______.</td><td><span class="highlight-green">L'IA faible</span></td></tr>
+      <tr><td>Textes, images, vidéos sont des exemples de données _______.</td><td><span class="highlight-green">Non-structurées</span></td></tr>
+      <tr><td>Les fichiers JSON et les logs sont des exemples de données _______.</td><td><span class="highlight-green">Semi-structurées</span></td></tr>
+      <tr><td>L'ingénierie des caractéristiques regroupe _______ et _______ des caractéristiques.</td><td><span class="highlight-green">L'extraction</span> et <span class="highlight-green">La sélection</span></td></tr>
+      <tr><td>L'intelligence est liée à _______ à travers ses facultés de compréhension et _______.</td><td><span class="highlight-green">L'être humain</span> / <span class="highlight-green">D'apprentissage</span></td></tr>
+      <tr><td>L'IA est définie comme _______ mises en œuvre afin de construire _______ capables d'un comportement intelligent.</td><td><span class="highlight-green">L'ensemble des techniques</span> / <span class="highlight-green">Des machines</span></td></tr>
+      <tr><td>L'IA faible se concentre sur une tâche ou un domaine _______.</td><td><span class="highlight-green">Spécifique</span></td></tr>
+      <tr><td>Dans l'apprentissage supervisé, l'algorithme apprend à partir de données _______.</td><td><span class="highlight-green">Étiquetées (labellisées)</span></td></tr>
+      <tr><td>Le machine learning repose sur des opérations _______, les données doivent être converties en valeurs _______.</td><td><span class="highlight-green">Mathématiques</span> / <span class="highlight-green">Numériques</span></td></tr>
+      <tr><td>Lors de l'application de la technique de _______, l'ensemble des données est divisé en k ensembles de tailles presque égales.</td><td><span class="highlight-green">La validation croisée (K-Fold Cross-Validation)</span></td></tr>
+      <tr><td>«False Positive» implique que la prédiction est _______ alors que la valeur réelle est _______.</td><td><span class="highlight-green">Positive</span> / <span class="highlight-green">Négative</span></td></tr>
+    </table>
+  </div>
+
+  <!-- QUESTIONS CLASSIQUES -->
+  <h4>② Questions de cours — Réponses modèles</h4>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Citez trois éléments nécessaires au fonctionnement d'un système d'IA.</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      <strong>1. Les données :</strong> elles nourrissent et entraînent les algorithmes. La qualité des données est critique.<br>
+      <strong>2. Les algorithmes :</strong> ils permettent d'atteindre l'objectif grâce à des règles et des modèles mathématiques.<br>
+      <strong>3. La puissance de calcul :</strong> nécessaire pour traiter les données et exécuter les algorithmes (GPU pour le Deep Learning).
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Quel est l'objectif de l'ingénierie des caractéristiques (feature engineering) ?</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      L'ingénierie des caractéristiques vise à créer ou sélectionner les variables les plus pertinentes à partir des données existantes, afin d'<strong>améliorer les performances du modèle</strong> de Machine Learning. Elle comprend deux sous-étapes :
+      <br>— L'<strong>extraction</strong> : générer de nouvelles variables à partir d'informations cachées (ex: transformer une date en jour de semaine, calculer l'IMC à partir du poids et de la taille).
+      <br>— La <strong>sélection</strong> : ne garder que les variables les plus utiles pour éviter de dégrader le modèle avec trop de variables.
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Quelle est la différence entre Feature Selection et Feature Extraction ?</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      <strong>Feature Extraction</strong> consiste à <em>créer de nouvelles variables</em> à partir des informations cachées dans les données. On transforme des données existantes pour en extraire de l'information utile (ex: extraire les contours d'une image, transformer une date en "jour de la semaine").
+      <br><br>
+      <strong>Feature Selection</strong> consiste à <em>choisir les variables existantes les plus pertinentes</em> parmi toutes les variables disponibles, en éliminant celles qui n'apportent pas de valeur au modèle. Trop de variables nuit aux performances.
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Expliquez le principe de la normalisation. Pourquoi l'utiliser ?</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      La normalisation consiste à ramener toutes les valeurs numériques à la <strong>même échelle</strong>, généralement entre 0 et 1, à l'aide de la formule : x_normalisé = (x - x_min) / (x_max - x_min).
+      <br><br>
+      On l'utilise parce que certains algorithmes de Machine Learning sont sensibles à l'échelle des variables (KNN, SVM, régression logistique, réseaux de neurones). Sans normalisation, une variable avec de grandes valeurs (ex: salaire en DH) dominerait une variable avec de petites valeurs (ex: âge en années) et biaiserait le modèle.
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Quelle est la différence entre Seaborn et Matplotlib ?</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      <strong>Matplotlib</strong> est la bibliothèque de visualisation de base en Python, permettant de créer des graphiques variés (histogrammes, courbes, scatter plots). Elle nécessite plus de code pour obtenir un résultat esthétique.
+      <br><br>
+      <strong>Seaborn</strong> est une extension de Matplotlib, plus puissante et plus esthétique par défaut. Elle est spécialisée dans les graphiques statistiques et permet de tracer facilement des graphiques relationnels entre variables, des distributions, des heatmaps. Elle permet aussi d'automatiser la création de graphiques pour travailler plus rapidement.
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Un modèle donne : Train = 98% et Test = 60%. Identifiez le problème et proposez une solution.</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      <strong>Problème identifié : Overfitting (Surapprentissage)</strong>
+      <br>Le modèle a mémorisé les données d'entraînement au lieu d'apprendre les patterns généraux. Il donne d'excellentes performances sur les données d'entraînement (98%) mais très mauvaises sur les données de test (60%), ce qui indique qu'il ne peut pas généraliser sur de nouvelles données.
+      <br><br>
+      <strong>Solutions proposées :</strong>
+      <br>— Ajouter plus de données d'entraînement
+      <br>— Réduire la complexité du modèle (simplifier l'architecture)
+      <br>— Utiliser la régularisation (L1 ou L2)
+      <br>— Utiliser la validation croisée (K-Fold Cross-Validation)
+      <br>— Utiliser la réduction de dimensionnalité pour éliminer les variables redondantes
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Dans la matrice de confusion, expliquez la différence entre l'erreur de type I et l'erreur de type II.</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      <strong>Erreur de Type I (False Positive — FP) :</strong> Le modèle prédit un résultat <em>positif</em> alors que la valeur réelle est <em>négative</em>. Exemple : le modèle dit qu'une transaction est "frauduleuse" alors qu'elle est normale.
+      <br><br>
+      <strong>Erreur de Type II (False Negative — FN) :</strong> Le modèle prédit un résultat <em>négatif</em> alors que la valeur réelle est <em>positive</em>. Exemple : le modèle dit qu'une transaction est "normale" alors qu'elle est frauduleuse.
+      <br><br>
+      Dans le secteur financier, l'erreur de Type II est généralement plus grave car elle permet à une vraie fraude de passer inaperçue.
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen — Cas pratique (type exercice 3)</div>
+    <p><strong>Pour un dataset de transactions bancaires (colonnes : ID, Numéro de compte, Type de transaction, Statut, Montant, Classe [Normal/Suspect]) :</strong></p>
+    <p>1. Avant la modélisation, quelle étape doit-on appliquer ? 2. Quelle opération pour la colonne "Classe" ? 3. Type d'apprentissage ? 4. Algorithme adapté ? 5. Étapes ML complètes.</p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse complète</div>
+      <strong>1. Étape à appliquer :</strong> Prétraitement des données (vérification des valeurs manquantes, encodage des variables catégorielles, normalisation des variables numériques, sélection de caractéristiques pertinentes).
+      <br><br>
+      <strong>2. Colonne "Classe" :</strong> Encodage (Label Encoding) : Normal → 0, Suspect → 1. Obligatoire car le ML ne traite que des valeurs numériques.
+      <br><br>
+      <strong>3. Type d'apprentissage :</strong> Apprentissage <em>supervisé</em> (car les données sont étiquetées — la colonne "Classe" fournit le label). La tâche est une <em>classification binaire</em> (deux classes : Normal ou Suspect).
+      <br><br>
+      <strong>4. Algorithme adapté :</strong> SVM (efficace pour classification binaire) ou Random Forest (robuste pour données tabulaires avec variables mixtes).
+      <br><br>
+      <strong>5. Étapes ML :</strong> (1) Définir le problème → classification binaire supervisée. (2) Préparer les données → gérer valeurs manquantes, encoder Type/Statut/Localisation/Classe, normaliser Montant. (3) EDA → visualiser la distribution des montants, détecter le déséquilibre des classes. (4) Séparation → 80% train / 20% test. (5) Choisir l'algo → SVM ou Random Forest. (6) Entraîner → model.fit(X_train, Y_train). (7) Évaluer → accuracy, précision, recall sur X_test. (8) Déployer → intégrer au système bancaire.
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Classez les algorithmes suivants : Q-Learning, Agglomerative Clustering, PPO, SVM, DQN, GMM, DBSCAN, KNN, Régression Logistique.</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      <strong>Supervisé :</strong> SVM (classification), KNN (classification/régression), Régression Logistique (classification)
+      <br><strong>Non supervisé :</strong> Agglomerative Clustering (clustering), GMM (clustering), DBSCAN (clustering)
+      <br><strong>Par renforcement :</strong> Q-Learning, DQN (Deep Q-Network), PPO (Proximal Policy Optimization)
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Proposez deux méthodes d'imputation pour une colonne "âge" avec valeurs manquantes. Donnez le code Python pour chaque méthode.</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      <strong>Méthode 1 — Imputation par la moyenne :</strong> On remplace les valeurs manquantes par la moyenne de la colonne. Avantage : simple, conserve tous les enregistrements. Inconvénient : sensible aux valeurs aberrantes.
+      <br><code>df['age'] = df['age'].fillna(df['age'].mean())</code>
+      <br><br>
+      <strong>Méthode 2 — Suppression des lignes :</strong> On supprime toutes les lignes contenant des valeurs manquantes. Avantage : données propres. Inconvénient : perte d'information si beaucoup de valeurs manquantes.
+      <br><code>df = df.dropna(axis=0)</code>
+    </div>
+  </div>
+
+  <div class="exam-q">
+    <div class="exam-q-label">Question d'examen</div>
+    <p><strong>Expliquez pourquoi on procède à l'encodage des variables catégorielles.</strong></p>
+    <div class="exam-answer">
+      <div class="exam-answer-label">Réponse</div>
+      On encode les variables catégorielles parce que le Machine Learning repose sur des <strong>opérations mathématiques</strong>. Les algorithmes ne peuvent traiter que des valeurs numériques. Les données catégorielles (ex: "Normal", "Suspect", "Homme", "Femme") doivent donc être converties en valeurs numériques (0, 1, 2...) avant d'être fournies au modèle pour l'entraînement.
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- SECTION 12 — RÉSUMÉ FINAL FLASH -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-header">
+    <span class="section-number">12</span>
+    <h2 class="section-title">Résumé Flash — À lire 30 min avant l'examen</h2>
+  </div>
+
+  <div class="grid-2">
+    <div class="card card-accent-purple">
+      <div class="card-title"><span class="dot dot-purple"></span>Formules à mémoriser</div>
+      <div class="formula" style="font-size:11px; margin: 4px 0;">Intelligence = Compréhension + Apprentissage</div>
+      <div class="formula" style="font-size:11px; margin: 4px 0;">Artificiel = Machine + Logiciel</div>
+      <div class="formula" style="font-size:11px; margin: 4px 0;">IA ⊃ ML ⊃ DL</div>
+      <div class="formula" style="font-size:11px; margin: 4px 0;">x_normalisé = (x - x_min) / (x_max - x_min)</div>
+    </div>
+    <div class="card card-accent-orange">
+      <div class="card-title"><span class="dot dot-orange"></span>Distinctions clés</div>
+      <ul class="clean">
+        <li>Supervisé = données étiquetées (X et Y)</li>
+        <li>Non supervisé = données brutes (X seulement)</li>
+        <li>Régression = Y continu | Classification = Y catégoriel</li>
+        <li>Overfitting = train ↑↑ test ↓↓</li>
+        <li>Underfitting = train ↓↓ test quelconque</li>
+        <li>ML = feature extraction manuelle | DL = automatique</li>
+        <li>Type I = FP | Type II = FN</li>
+      </ul>
+    </div>
+    <div class="card card-accent-green">
+      <div class="card-title"><span class="dot dot-green"></span>3 types de données</div>
+      <ul class="clean">
+        <li><strong>Structurées</strong> : tableaux Excel/SQL, age, prix</li>
+        <li><strong>Semi-structurées</strong> : JSON, XML, logs</li>
+        <li><strong>Non-structurées</strong> : texte, images, vidéo, PDF</li>
+      </ul>
+    </div>
+    <div class="card card-accent-red">
+      <div class="card-title"><span class="dot dot-red"></span>Algorithmes sensibles à l'échelle</div>
+      <ul class="clean">
+        <li>KNN, SVM, Régression Logistique</li>
+        <li>Réseaux de neurones, Méthodes basées distances</li>
+        <li>NON sensibles : Arbres, Random Forest, DBSCAN</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert" style="margin-top: 20px;">
+    <span class="alert-icon">🏆</span>
+    <div>
+      <strong>Les 5 choses que la prof demande toujours :</strong><br>
+      1. Définir IA, ML, DL avec la hiérarchie et les différences<br>
+      2. Différence supervisé vs non supervisé (données étiquetées ou non)<br>
+      3. Différence régression vs classification (type de la sortie Y)<br>
+      4. Overfitting/Underfitting : identifier + proposer une solution<br>
+      5. Classer des algorithmes par type d'apprentissage
+    </div>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<div style="background: var(--surface); border-top: 1px solid var(--border); padding: 24px 40px; text-align: center;">
+  <p style="font-family:'DM Mono',monospace; font-size:11px; color: var(--text-dim);">
+    GUIDE COMPLET — IA APPLIQUÉE À LA FINANCE — Pr. NASSIH Bouchra — Chapitres 1 & 3
+  </p>
+</div>
+
+</body>
+</html>

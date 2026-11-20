@@ -1,0 +1,67 @@
+Examen d’Intelligence Artificielle (session normale)
+Année universitaire : 2025/2026
+S5 - Option : Politiques Economiques
+Durée : 1h30
+Exercice 1 : (7pts)
+Complétez les phrases suivantes avec le ou les mots appropriés.
+
+
+
+
+
+
+
+
+
+L’intelligence est liée à …………….. à travers ses facultés de compréhension et
+…………….., et elle est observable grâce à son comportement.
+L’IA est définie comme …………….. mises en œuvre afin de construire
+………………capables de faire preuve d’un comportement que l’on peut qualifier
+intelligent.
+L’IA faible se concentre sur une tâche ou un domaine ……………..
+Dans l’apprentissage supervisé, l’algorithme apprend à partir de données ……………..
+Le machine learning repose sur des opérations …………….., les données doivent donc
+être converties en valeurs …………….. pour être traitées par les modèles.
+Lors de l’application de la technique de …………….., l’ensemble des données est
+divisé en k ensembles de tailles presque égales.
+« False Positive » implique que la prédiction est …………….. alors que la valeur réelle
+est ……………..
+
+Exercice 2 : (10pts)
+On dispose d’un dataset « Student » avec les colonnes : âge, sexe (Femme/Homme), studytime,
+note. Certaines valeurs de la colonne âge sont manquantes.
+Proposez deux méthodes d’imputation possibles pour la colonne âge.
+Donnez le code Python pour chaque méthode.
+Expliquez pourquoi on procède à l’encodage des variables catégorielles.
+Quelle est la différence entre Feature Selection et Feature Extraction ?
+Expliquez le principe de la normalisation.
+Citez au moins trois algorithmes sensibles à la mise à l'échelle des variables.
+Expliquez la différence entre Machine Learning et Deep Learning à l’aide d’un schéma
+simple.
+8. Expliquez la relation entre l’IA, le machine learning, le deep learning et l’IA générative
+9. Dans la matrice de confusion, expliquez la différence entre l’erreur de type I et l’erreur
+de type II.
+10. Un modèle donne : Train = 98% et Test = 60%. Identifiez le problème et proposez une
+solution.
+1.
+2.
+3.
+4.
+5.
+6.
+7.
+
+1
+
+Exercice 3 : (3pts)
+Classez les algorithmes suivants selon le type d’apprentissage : supervisé, non supervisé, par
+renforcement.
+Q-Learning - Agglomerative Clustering - Proximal Policy Optimization (PPO) - Support Vector
+Machines (SVM) - Deep Q-Network (DQN) - Gaussian Mixture Models (GMM) – DBSCAN
+- K-Nearest Neighbors (KNN) - Régression Logistique.
+
+Bon courage !
+
+2
+
+

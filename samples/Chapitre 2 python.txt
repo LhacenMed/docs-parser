@@ -1,0 +1,282 @@
+L’intelligence artificielle
+appliquée à la finance
+Pr. NASSIH Bouchra
+Bouchra.nassih1@uit.ac.ma
+
+Chapitre 2
+Initiation à Python
+
+Pr. B.NASSIH
+
+2
+
+Introduction
+• Le langage de programmation Python a été créé en 1989 par Guido
+
+van Rossum
+• La première version publique de ce langage a été publiée en 1991.
+• La dernière version de Python est la version 3. Plus précisément, la
+version 3.11
+
+Introduction
+• La langage Python est un langage interprété c’est• Contrairement à C et C++ et java qui sont des langage
+à-dire que le programme écrit avec ce langage est
+compilé (c’est-à-dire que nous voulons compiler le
+exécuté directement sans passé par la compilation
+programme pour le convertir en langage machine ) puis
+exécuter le programme pour qu’il affiche le résultat
+Qu'est-ce que le langage
+python ?
+
+Pr. NASSIH
+
+4
+
+Introduction
+Les avantages de python:
+
+• Les développeurs peuvent l’apprendre rapidement
+• Commandes simplifiées
+• Facilité de lecture
+
+• Utilisé par de grandes entreprises
+• Il y a énormément de bibliothèques open source
+Pr. NASSIH
+
+5
+
+Installation et environnement de travail
+• Installation
+Directement à partir du www.python.org
+Anaconda regroupe ensemble d’outils
+Jupyter notebook
+
+Google Colab
+
+Environnement de développement
+• Jupyter Notebook
+une application web qui vous permet décrire des lignes de code Python avec
+explications textuelles
+• Google Colab
+Version cloud de jupyter avec GPU/TPU gratuits
+Aucune installation
+Avoir un compte Google
+• VS Code
+Un éditeur de code source léger, gratuit et open-source développé par Microsoft,
+Supporte de nombreux langages de programmation (JavaScript, Python, C++,
+HTML, etc.).polyvalent
+
+Concepts de base Python
+• Les données
+Les données sont des informations nécessaires au déroulement d'un
+programme.
+Le type de données le plus utilisé en Python est les variables.
+Une variable est une donnée dont le contenu peut être modifié par
+
+une action durant l'exécution d'un programme.
+
+Les variables
+
+9
+
+Les variables
+
+10
+
+Les variables
+
+11
+
+Les variables
+• Nommage des variables
+Vous pouvez utiliser des lettres minuscules (a à z) ou majuscules (A à
+Z), des chiffres (0 à 9) ou le caractère de soulignement (_) pour
+nommer les variables.
+Mais vous devez respecter les règles suivantes:
+Le nom de la variable ne doit pas commencer par un nombre,
+Éviter les mots réservés par Python (print, def, and, try, for ...),
+Python est sensible à la casse, ce qui signifie que les variables Note,
+note ou NOTE sont différentes.
+
+Exercice 1
+• Exécutez les instructions suivantes
+A=3
+C= A+ 5
+B=8
+D=C
+A=C +D +9
+B=A+6
+
+L'instruction d'écriture
+• La fonction print() permet d'afficher n'importe quel objet Python
+dans la console.
+• Il suffit d'indiquer l'objet à afficher entre parenthèses.
+• Exemple
+
+Exercice 2
+• Ecrire un programme qui affiche le message suivant :
+“bonjour tout le monde ”
+
+Les bibliothèques
+• Les bibliothèques (ou librairies) sont un peu le super-pouvoir de Python.
+
+• La plupart des langages de programmation disposent de librairies. Il suffit
+de les importer dans le programme grâce à quelques lignes de code.
+
+• En langage Python, une librairie c’est un ensemble de fonctions, de classes
+d’objets et de constantes qui permettent de travailler sur un thème
+particulier.
+
+Les bibliothèques
+• Il existe de nombreuses bibliothèques Python, et c’est pour cela que
+c’est le langage de programmation le plus populaire.
+• Calcul
+• Machine Learning
+• Visualisation
+• Web Scraping
+
+Pandas
+• La bibliothèque la plus complète en ce qui concerne la manipulation
+de données.
+• Elle permet de travailler avec :
+• Des tableaux de données en deux dimensions (lignes et colonnes)
+appelés DataFrame.
+• Avec Pandas, tu peux importer des données depuis un fichier .csv afin
+de les nettoyer, transformer…
+• Pandas permet également d’effectuer des calculs statistiques sur les
+données, par exemple avec la méthode .mean() qui permet d’obtenir
+la moyenne des valeurs contenues dans une colonne.
+
+Pandas
+• Voici un exemple de DataFrame qu’une banque pourrait utiliser :
+• Une ligne correspond à un client, et les colonnes offrent des informations
+complémentaires : âge, revenu, statut de propriétaire ou non, situation d’emploi,
+but de l’emprunt, note de l’emprunt (son risque), montant de l’emprunt, taux
+d'intérêt de l’emprunt…
+
+Pandas
+Les DataFrames:
+
+Lecture d’un fichier
+• Lire un fichier avec pandas
+• Pour ouvrir un fichier .xls :
+pd.read_excel()
+• Pour ouvrir un fichier .CSV :
+pd.read_csv()
+• Pour ouvrir un fichier .json :
+pd.read_json()
+• Etc….
+pd.read_html()
+pd.read_sql()
+pd.read_...()
+
+Les fonctions de pandas
+• Head : affiche les premiers éléments du DataFrame
+• Tail : affiche les derniers éléments du DataFrame
+• Unique : renvoie les valeurs uniques présentes dans une structure de
+données Pandas
+• Describe : donne des statistiques diverses sur les données contenues
+dans chaque colonne
+• Fillna : remplacer les NaN par d'autres valeurs
+• Dropna : permet de supprimer les axes (colonnes ou lignes) qui
+contiennent des NaN
+
+Les fonctions de pandas
+• Rename : renommer les colonnes ou les lignes d'un
+DataFrame
+• Drop : permet de supprimer des axes (colonnes ou
+lignes) d'un DataFrame
+
+• Pour les fonctions qui modifient un dataframe: drop ou dropna
+
+• Il existe le paramètre inplace qui permet d’appliquer nos
+modifications sur le dataset
+équivalent
+
+Manipulation de base
+Pour accéder à une colonne d’un DataFrame:
+• Syntaxe:
+• nom_DataFrame[nom_colonne]
+
+• Exemple:
+• clients['email']
+• clients['age']
+• clients['age'][0:10]
+
+Les données manquantes
+Méthode 1:
+Compléter par une
+valeur par défaut
+
+data.fillna(data['age'].mean())
+
+Les données manquantes
+• Méthode 2:
+Éliminer les lignes
+
+data.dropna(axis=0)
+
+Matplotlib
+• Permet de créer des graphiques qui modélisent les données sur
+
+lesquelles tu travailles.
+• Matplotlib s’utilise en synergie avec Numpy ou Pandas.
+• Matplotlib offre une large variété de types de graphes qui s’adaptent
+à tous les besoins : histogrammes, boîtes à moustache, courbes,
+scatter plots,
+
+Matplotlib
+• Exemple
+
+Seaborn
+• Une extension de Matplotlib.
+• C’est un outil plus puissant, qui permet de tracer des graphiques
+relationnels entre deux vecteurs et des graphiques de distribution.
+• Seaborn a également la réputation d’être plus fonctionnel, car les
+thèmes par défaut sont esthétiques et peuvent être utilisés pour
+concevoir un tableau de bord, ce qui n’est pas toujours le cas des
+graphiques Matplotlib.
+• De plus, avec Seaborn il est possible d’automatiser la création de
+graphiques : cela te permet de travailler plus vite.
+
+Seaborn:
+
+• Comparaison avec matplotlib:
+
+30
+
+Scikit learn
+• Appelée sklearn, est le module de machine learning le plus populaire.
+
+• Cette biliothèque permet d’effectuer l'apprentissage supervisé ou nonsupervisé. Elle est également performante en modélisation statistique,
+particulièrement pour la classification et la régression.
+• Sklearn propose de choisir un modèle parmi différentes classes de
+modèles, puis de le paramétrer, de l’entraîner et enfin de le tester sur tes
+données.
+
+Travaux Pratiques
+
+Environnement de travail
+Colab:
+• Google Colab ou Colaboratory est un service cloud, offert par Google
+(gratuit), basé sur Jupyter Notebook
+• Cette plateforme permet d’entraîner des modèles de Machine
+Learning directement dans le cloud. Sans avoir besoin d’installer quoi
+que ce soit sur notre ordinateur à l’exception d’un navigateur.
+• Google Colab prend en charge Python.
+Google Colab, La version cloud de Jupyter Notebook
+
+Environnement de travail
+• Vous pouvez accéder directement à l’interface de Google Colab via le
+lien suivant:
+https://colab.research.google.com/
+
+Environnement de travail
+• Google Colab est un outil complet pour entraîner rapidement et
+tester rapidement des modèles d’apprentissage automatique sans
+avoir de contrainte matérielle.
+• Sa particularité est que tout le monde peut l’utiliser (gratuit
+
+également !)
+
+

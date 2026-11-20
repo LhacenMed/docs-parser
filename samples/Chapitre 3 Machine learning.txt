@@ -1,0 +1,459 @@
+L’intelligence artificielle
+appliquée à la finance
+Pr. NASSIH Bouchra
+Bouchra.nassih1@uit.ac.ma
+
+Plan
+• Chapitre 1 : Introduction à l’Intelligence Artificielle
+• Chapitre 2 : Les bases de Python
+• Chapitre 3 : Machine Learning
+
+2
+
+Chapitre 3
+
+Machine Learning
+
+3
+
+Introduction
+L’intelligence Artificielle
+Machine Learning (ML)
+
+Deep Learning (DL) Repose sur les réseaux
+
+l’ensemble des techniques
+permettant à des machines
+d’imiter l’intelligence humaine,
+notamment en apprenant à partir
+de données et en prenant des
+décisions
+
+Donner à une machine la
+capacité d’apprendre sans
+être explicitement
+programmée
+
+de neurones profonds
+(Deep ANN) pour
+apprendre à partir de
+grandes quantités de
+données, en imitant la
+manière dont le
+cerveau humain traite
+l’information
+
+4
+
+Introduction
+• L'apprentissage automatique fait référence au développement, à l’analyse et
+
+à l’implémentation de méthodes qui permettent à une machine:
+• D’évoluer grâce à un processus d’apprentissage
+• De remplir des tâches qu’il est difficile ou impossible de remplir par des moyens
+algorithmiques plus classiques
+
+• L’objectif du machine learning est d’apprendre à partir de données issues
+d’observations réelles.
+5
+
+Introduction
+Arthur Samuel (1959):
+
+Tom M. Mitchell (1997):
+
+• Champ d’étude qui donne aux
+ordinateurs la capacité d'apprendre
+sans
+avoir
+été
+programmés
+explicitement
+
+• On dit qu'un programme apprend d'une expérience
+E par rapport à une classe de tâches T et à une
+mesure de performance P si sa performance sur T,
+mesurée par P, augmente avec l'expérience E.
+
+6
+
+Machine Learning: Modèle
+
+Il consiste à développer et
+entraîner
+un
+modèle
+mathématique à partir d’un
+ensemble
+de
+données
+d’apprentissage,
+afin
+qu’il
+puisse généraliser et effectuer
+des prédictions sur de nouvelles
+données.
+
+le modèle le plus adapté à nos données." 7
+
+Machine Learning: Modèle
+• On peut voir le modèle comme une fonction notée f qui prend un échantillon en
+entrée, et qui renvoie une décision. Données
+
+Où :
+
+x : l’espace des entrées (caractéristiques),
+y : l’espace des sorties (valeurs à prédire, classes, etc.),
+f : la fonction cible que le modèle doit apprendre à approximer à partir des
+données.
+• La détermination de f est le cœur d’un problème de Machine Learning.
+• Celle-ci se passe en deux étapes :
+Choix d’une fonction.
+Détermination des paramètres de la fonction à l’aide des échantillons.
+Cette phase s’appelle entraînement ou apprentissage du modèle.
+8
+
+À quoi sert un modèle ?
+• Un modèle peut être utilisé pour :
+prédire des ventes
+détecter une fraude
+reconnaître une image
+ traduire un texte
+segmenter des clients
+recommander un produit
+reconnaître la voix
+9
+
+Type d’apprentissage
+Apprentissage
+non supervisé
+
+• Pour donner à un ordinateur la
+
+capacité d’apprendre, on utilise
+des méthodes d’apprentissage qui
+sont fortement inspirées de la
+façon
+
+dont
+
+nous,
+
+les
+
+êtres
+
+Apprentissage
+supervisé
+
+Type
+d’apprentissage
+
+Apprentissage
+auto
+supervisé
+
+humains, apprenons à faire des
+choses.
+Apprentissage
+par
+Renforcement
+
+10
+
+L’apprentissage supervisé
+• Supervised Learning
+• le paradigme d’apprentissage le plus populaire en Machine Learning et en Deep
+Learning.
+• Il consiste à superviser l’apprentissage de la machine en lui montrant
+des exemples (des données) de la tâche qu’elle doit réalisée.
+
+11
+
+L’apprentissage supervisé
+• La machine reçoit des données caractérisées par des variables x (features)
+et annotées par une variable y (label).
+But: la machine apprend à prédire la valeur y en fonction des caractérisées
+qu’on lui fournit.
+
+12
+
+L’apprentissage supervisé
+• Exemple 1: Prédiction du prix d’un appartement
+• DataSet (données étiquetées)
+
+Entrée
+
+Sortie
+
+La régression
+13
+
+L’apprentissage supervisé
+• Exemple 2: La détection des transactions frauduleuses
+• DataSet (données étiquetées)
+
+Entrée
+
+Sortie
+
+La classification
+14
+
+L’apprentissage supervisé
+Il peut servir pour résoudre deux types de
+
+problèmes :
+La Régression:
+o Prédire la valeur d’une variable continue
+• Prix d’un appartement
+• Le montant des ventes d'une entreprise
+La Classification:
+• La consommation électrique dans une ville
+
+o Prédire des réponses discrètes
+• Email spam/non spam
+• L'accord ou du refus d'un crédit
+• une tumeur est maligne (𝑦 = 1) ou
+bénigne
+
+15
+
+L’apprentissage non supervisé
+• L'algorithme analyse des données brutes, non étiquetées, pour découvrir par lui-même des
+structures, des groupes ou des motifs cachés sans intervention humaine.
+
+• Au lieu de montrer à la machine des exemples (x,y) de ce qu’elle doit apprendre , on lui fournit
+uniquement des données x et on lui demande d’analyser la structure de ces données pour
+apprendre par elle-même à réaliser certaines tâches.
+
+Exemple:
+• Classer les données
+selon leur ressemblance
+
+16
+
+L’apprentissage non supervisé
+Les types d'apprentissage non supervisé les plus courants sont les suivants :
+
+ Clustering
+ Réduction de la dimensionnalité
+ Règles d'association
+
+17
+
+L’apprentissage non supervisé
+Clustering : lorsque l'algorithme recherche des groupes de données similaires et les points
+communs entre eux. Les exemples concrets incluent la segmentation des clients et le filtrage
+automatique des e-mails.
+
+18
+
+Apprentissage non supervisé
+Les techniques de clustering:
+• K-Means
+
+• Mean Shift
+• Agglomerative Clustering (hierarchical Clustering)
+• DBSCAN(density-based spatial clustering of applications with noise)
+• Spectral clustering
+• Gaussian Mixture Models (GMM)
+
+19
+
+Apprentissage non supervisé
+•Quelques applications de clustering :
+Regrouper des clients
+Clustering des peuplements forestiers
+Détection d’anomalies sans labels
+
+20
+
+L’apprentissage non supervisé
+• Réduction de dimensionnalité
+• Le principe:
+• Réduire la complexité du dataset en projetant les données dans un espace de plus
+petite dimension (c’est-à-dire avec moins de variables))
+
+• Objectif:
+• Accélérer l’apprentissage de la machine
+• Lutter contre le fléau de la dimension, un phénomène qui augmente le risque
+d’overfitting lorsqu’il y a trop de variables (ou dimensions).
+• Le "fléau de la dimension", c’est quand il y a trop de variables, ce qui perturbe l’apprentissage de l’IA et
+augmente le risque d’erreurs.
+21
+
+L’apprentissage non supervisé
+• Réduction de dimensionnalité
+ Les données multivariées comprennent souvent un grand nombre de variables ou de caractéristiques. Cela peut avoir une
+incidence sur le run time et les besoins en mémoire. Les techniques de réduction de la dimensionnalité réduisent le
+nombre de caractéristiques (dimensions) tout en conservant les informations nécessaires des données d'origine.
+
+ On cherche donc à simplifier les données pour les rendre :
+ plus faciles à visualiser,
+ plus rapides à traiter,
+ moins bruitées (moins de redondance)
+22
+
+L’apprentissage non supervisé
+• L'apprentissage par association de règles
+Permet d'identifier des relations intéressantes entre des variables
+dans de grandes bases de données.
+Par exemple, les règles d'association peuvent être utilisées sur des
+données transactionnelles pour identifier les articles les plus
+susceptibles d'être achetés ensemble par les utilisateurs.
+23
+
+La réduction de dimensionnalité
+• Les techniques de la réduction de dimensionnalité:
+• L’Analyse en Composantes Principales (PCA)
+• L’Analyse en Composantes Indépendantes (ICA)
+• L’Analyse Discriminante Linéaire (LDA)
+• L’Analyse en Composantes Principales à Noyaux (KPCA )
+• Isomap,
+• L’échelle multidimensionnelle(MDS)
+• …
+24
+
+Apprentissage semi-supervisé
+• Mélange de données étiquetées (peu) + non étiquetées (beaucoup).
+• Très utilisé lorsqu’on manque de labels.
+• Applications :
+• Classification d’images lorsque les labels sont coûteux
+• Détection de comportements anormaux
+• Analyse forestière avec peu de données terrain
+
+25
+
+Les ennemis du Machine Learning
+• Underfitting / Overfitting
+
+Le modèle n’arrive pas à
+s’adapter aux données
+d’apprentissage
+
+Bon modèle: se situe
+entre les deux extrêmes
+
+Le modèle est meilleur à prédire
+l’apprentissage que le test
+
+26
+
+Machine Learning VS Deep Learning
+
+Cette force, a permit le développement d'algorithme de Deep Learning très robuste capable de
+mieux comprendre les données non structurées tels que du texte, du son et des images.
+27
+
+Les étapes d’un projet Machine Learning
+• Un projet de Machine Learning suit un ensemble d’étapes méthodiques
+permettant de passer d’un besoin métier à une solution opérationnelle.
+• Ces étapes forment un cycle, car un modèle ML doit être continuellement
+amélioré selon les données et les retours utilisateurs.
+Définition du problème
+Collecte et préparation des données
+Exploration des données (EDA)
+Séparation des données
+Choix du modèle
+Entraînement du modèle
+Évaluation et optimisation
+Déploiement et suivi
+28
+
+Les étapes d’un projet Machine Learning
+• Définition du problème
+La première étape d’un projet en Machine Learning. Elle consiste à
+comprendre le besoin réel, à définir le cadre de travail et à choisir la
+bonne approche algorithmique.
+Identifier l'objectif métier, déterminer si c'est un problème
+d'apprentissage supervisé (classification, régression) ou nonsupervisé.
+
+29
+
+Les étapes d’un projet Machine Learning
+• Collecte et préparation des données
+Les données sont la base de tout projet en Machine Learning.
+• Sources possibles :
+Bases de données internes (SQL, NoSQL)
+APIs externes (météo, finance, réseaux sociaux…)
+Fichiers plats : CSV, Excel, JSON
+Capteurs / IoT (température, mouvement, sons…)
+Logs d’applications (clickstream, journaux systèmes)
+Web scraping (données extraites de sites web)
+Open Data (Kaggle, UCI Machine Learning Repository, data.gov…
+• Rassembler les données pertinentes et les nettoyer (gestion des valeurs manquantes,
+des erreurs et des incohérences).
+30
+
+Les étapes d’un projet Machine Learning
+• Exploration des données (EDA)
+Une étape essentielle dans tout projet Data Science ou Machine Learning. Elle permet de
+comprendre les données avant de construire un modèle. et souvent, un bon EDA = 50% du
+travail.
+Comprendre la structure des données
+Types de variables (numériques, catégorielles, textuelles, images)
+Taille et volume du dataset (nombre de lignes, colonnes)
+Statistiques descriptives (moyenne, médiane, min/max, quartiles)
+Identifier les données manquantes
+Colonnes avec beaucoup de valeurs nulles
+Stratégies pour les gérer :
+ Suppression
+ Imputation (moyenne, médiane, modèle)
+
+31
+
+Les étapes d’un projet Machine Learning
+• Séparation des données
+Diviser les données en ensembles d'entraînement (pour entraîner le
+modèle), de validation et de test (pour évaluer la performance).
+
+32
+
+Les étapes d’un projet Machine Learning
+• Choix du modèle
+Le choix du modèle est une étape essentielle dans un projet de Machine
+Learning.
+Le modèle à utiliser dépend du type de problème, de la forme des
+données, de la complexité, et des objectifs du projet (rapidité,
+interprétation, précision…).
+Exemples :
+• Régression : Linear Regression, Random Forest, XGBoost…
+• Classification : Logistic Regression, SVM, KNN, …
+• Clustering : K-Means, DBSCAN, PCA…
+33
+
+Les étapes d’un projet Machine Learning
+• Entraînement du modèle
+L’entraînement est l’étape où le modèle apprend à partir des données.
+On lui fournit les exemples d’entraînement (X_train, y_train), et il ajuste ses paramètres (poids,
+coefficients, arbres, etc.) pour minimiser l’erreur.
+Choisir une fonction de perte (loss function)
+La loss function, ou fonction de perte, est une formule mathématique qui mesure l’erreur d’un
+modèle de machine learning :
+elle compare la prédiction du modèle avec la valeur réelle,
+Ajuster les hyperparamètres (learning rate, nombre d’arbres…)
+Le learning rate est un hyperparamètre qui contrôle la vitesse d’apprentissage du modèle.
+Dans les modèles enensemble (Random Forest, Gradient Boosting), le nombre d’arbres détermine
+combien d’arbres seront construits.
+Utiliser une méthode d’optimisation(gradient descent, RMSprop…)
+
+34
+
+Les étapes d’un projet Machine Learning
+• Évaluation et optimisation
+• Tester le modèle sur le jeu de test en utilisant des métriques (MAE,
+MSE, Précision) et ajuster les hyperparamètres
+
+35
+
+Les étapes d’un projet Machine Learning
+• Déploiement et suivi
+Le déploiement consiste à rendre le modèle accessible à des
+utilisateurs, à une application ou à un système.
+Déployer le modèle en production, puis surveiller ses performances
+et mettre à jour le modèle avec de nouvelles données si nécessaire
+
+36
+
+
